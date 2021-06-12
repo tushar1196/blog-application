@@ -13,10 +13,10 @@ public class Posts {
     private String excerpt;
     private String content;
     private String author;
-    private Timestamp published_at;
-    private boolean is_published;
-    private Timestamp created_at;
-    private Timestamp updated_at;
+    private Timestamp publishedAt;
+    private boolean isPublished;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public int getId() {
         return id;
@@ -58,36 +58,36 @@ public class Posts {
         this.author = author;
     }
 
-    public Timestamp getPublished_at() {
-        return published_at;
+    public Timestamp getPublishedAt() {
+        return publishedAt;
     }
 
-    public void setPublished_at(Timestamp published_at) {
-        this.published_at = published_at;
+    public void setPublishedAt(Timestamp publishedAt) {
+        this.publishedAt = publishedAt;
     }
 
-    public boolean isIs_published() {
-        return is_published;
+    public boolean isPublished() {
+        return isPublished;
     }
 
-    public void setIs_published(boolean is_published) {
-        this.is_published = is_published;
+    public void setPublished(boolean published) {
+        this.isPublished = published;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdated_at() {
-        return updated_at;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -98,10 +98,10 @@ public class Posts {
                 ", excerpt='" + excerpt + '\'' +
                 ", content='" + content + '\'' +
                 ", author='" + author + '\'' +
-                ", published_at=" + published_at +
-                ", is_published=" + is_published +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
+                ", published_at=" + publishedAt +
+                ", is_published=" + isPublished +
+                ", created_at=" + createdAt +
+                ", updated_at=" + updatedAt +
                 '}';
     }
 }
