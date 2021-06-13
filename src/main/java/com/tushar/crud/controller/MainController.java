@@ -19,9 +19,9 @@ public class MainController {
     @Autowired
     UserRepo userRepo;
 
-    @RequestMapping("/home")
-    public String home() {
-        return "home.html";
+    @RequestMapping("/postdashboard")
+    public void getPosts() {
+        System.out.println();
     }
 
 
