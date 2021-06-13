@@ -1,4 +1,4 @@
-package com.tushar.crud;
+package com.tushar.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
-package com.tushar.crud.controller;
+package com.tushar.app.controller;
 
-import com.tushar.crud.repository.*;
+import com.tushar.app.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +19,13 @@ public class MainController {
     @Autowired
     UserRepo userRepo;
 
-    @RequestMapping("/postdashboard")
-    public void getPosts() {
-        System.out.println();
+    @RequestMapping("/blogssdashboard")
+    public String getBlogs() {
+        System.out.println("in blogs");
+        
+
+
+        return "blogdashboard";
     }
 
 

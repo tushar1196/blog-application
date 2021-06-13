@@ -1,6 +1,6 @@
-package com.tushar.crud.repository;
+package com.tushar.app.repository;
 
-import com.tushar.crud.model.Tags;
+import com.tushar.app.model.Tags;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
