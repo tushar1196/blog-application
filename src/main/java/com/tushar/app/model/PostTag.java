@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
-public class PostTags {
+public class PostTag {
 
     @Id
     private int postId;

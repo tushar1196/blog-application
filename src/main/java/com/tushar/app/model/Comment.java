@@ -5,11 +5,14 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
-public class Tags {
+public class Comment {
 
     @Id
     private int id;
     private String name;
+    private String email;
+    private String comment;
+    private int postId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -27,6 +30,30 @@ public class Tags {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public Timestamp getCreatedAt() {
@@ -47,11 +74,14 @@ public class Tags {
 
     @Override
     public String toString() {
-        return "Tags{" +
+        return "Comments{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", created_at=" + createdAt +
-                ", updated_at=" + updatedAt +
+                ", email='" + email + '\'' +
+                ", comment='" + comment + '\'' +
+                ", postId=" + postId +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

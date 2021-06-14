@@ -10,5 +10,15 @@ in blogsdashboard
 
 <h5 th:text=${posts}></h5>
 
+<table>
+<tr th:each="post : ${posts}">
+    <td th:text="${post.id}">1</td>
+    <td th:text="${post.id}">1</td>
+    <td th:text="${post.id}">1</td>
+    <td th:text="${post.id}">1</td>
+    <td><a href="#" th:text="${message.title}">Title ...</a></td>
+    <td th:text="${message.text}">Text ...</td>
+</tr>
+</table>
 </body>
 </html>

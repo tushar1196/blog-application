@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
-public class Posts {
+public class Post {
 
     @Id
     private int id;
