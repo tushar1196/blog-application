@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+in post
+${message}
+
+<form action="/savepost" method="get">
+
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="excerpt">Excerpt:</label><br>
+    <input type="text" id="excerpt" name="excerpt" required><br><br>
+
+    <label for="content">Content:</label><br>
+    <input type="text" id="content" name="content" required><br><br>
+
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="author" required><br><br>
+
+
+    <p>
+        <label>Tags:
+            <input type="checkbox" name="tags"
+                   th:each="tag : ${tags}"
+                   th:text="${tag.name}"
+                   th:value="${tag.id}"
+                   th:field="*{tags}"
+            />
+        </label>
+    </p>
+
+
+    <input type="submit" value="Submit">
+
+</form>
+
+
+</body>
+</html>

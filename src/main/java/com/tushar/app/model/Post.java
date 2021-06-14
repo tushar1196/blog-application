@@ -1,13 +1,14 @@
 package com.tushar.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity(name="Posts")
 public class Post {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String excerpt;
@@ -17,6 +18,8 @@ public class Post {
     private boolean isPublished;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @OneToMany
+    private List<Tag> tags;
 
     public int getId() {
         return id;

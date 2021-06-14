@@ -18,4 +18,9 @@ public class PostService {
         System.out.println("in service class");
         return posts;
     }
+
+    public void savePost(Post post) {
+        Post save = postsRepo.save(post);
+        System.out.println(save);
+    }
 }

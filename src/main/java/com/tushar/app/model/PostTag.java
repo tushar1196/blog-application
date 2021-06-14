@@ -1,14 +1,13 @@
 package com.tushar.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name="PostTags")
 public class PostTag {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postId;
     private int tagId;
     private Timestamp createdAt;
