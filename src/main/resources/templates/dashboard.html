@@ -7,21 +7,37 @@
 </head>
 <body>
 
-<div align="left"><a href="addpost">Create Blog</a></div>
-
-in blogsdashboard
+<div align="right"><a href="addpost">Create Blog</a></div>
 
 <h5 th:text=${posts}></h5>
 
-<table>
-<tr th:each="post : ${posts}">
-    <td th:text="${post.id}">1</td>
-    <td th:text="${post.id}">1</td>
-    <td th:text="${post.id}">1</td>
-    <td th:text="${post.id}">1</td>
-    <td><a href="#" th:text="${message.title}">Title ...</a></td>
-    <td th:text="${message.text}">Text ...</td>
-</tr>
+<table border="5">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Excerpt</th>
+        <th>Author</th>
+        <th>Published Date And Time</th>
+        <th>Tags</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td th:text="${post.title}"></td>
+        <td th:text="${post.excerpt}"></td>
+        <td th:text="${post.author}"></td>
+        <td th:text="${post.publishedAt}"></td>
+        <td th:text="${post.tags}"></td>
+        <td><a href="update${post.id}">Update</a></td>
+        <td><a href="delete${post.id}">Delete</a></td>
+    </tr>
+    </tbody>
 </table>
 </body>
 </html>
