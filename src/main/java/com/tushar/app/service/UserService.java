@@ -16,15 +16,9 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepo.save(user);
-        System.out.println("user repo save user");
     }
 
-
-
-
-
-
-    public boolean verifyCredientials(String email,String password) {
+    public boolean verifyCredential(String email, String password) {
         List<User> user = userRepo.findByUserNameAndPassword(email, password);
         System.out.println(user);
         if(user.size()>0)

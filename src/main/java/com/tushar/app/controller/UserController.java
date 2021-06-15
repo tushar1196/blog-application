@@ -2,7 +2,6 @@ package com.tushar.app.controller;
 
 import com.tushar.app.model.User;
 import com.tushar.app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,32 +27,24 @@ public class UserController {
         return "addUser";
     }
 
-    @GetMapping("/saveUser")
-    public String saveUser(@ModelAttribute ("user") User user, Map<String, Object> model) {
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute ("user") User user,Model model) {
         System.out.println(user);
         userService.saveUser(user);
-        return null;
+        String accountCreationMessage="Thanks for creating Account";
+        model.addAttribute("accountCreationMessage",accountCreationMessage);
+        return "userLogin";
     }
-
-
-
-
-
-
 
     @RequestMapping("/checkCredentials")
-    public String verifyCredentials (@RequestParam String email , @RequestParam String password) {
-        boolean isValidUser = userService.verifyCredientials(email, password);
+    public String verifyCredentials (@RequestParam String email , @RequestParam String password,Model model) {
+        boolean isValidUser = userService.verifyCredential(email, password);
         if (isValidUser)
             return "/dashboard";
-        else
+        else {
+            String invalidCredentialMessage = "Invalid Credentials ";
+            model.addAttribute("invalidCredentialMessage",invalidCredentialMessage);
             return "userLogin";
-    }
-    @RequestMapping("/saveUser")
-    public String saveUser(@RequestParam String name,@RequestParam String email,@RequestParam String password,@RequestParam String confirmPassword) {
-        System.out.println("in save user controller");
-
-
-        return null;
+        }
     }
 }
