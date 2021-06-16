@@ -6,11 +6,7 @@ import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -35,28 +31,31 @@ public class PostController {
     }
 
     @RequestMapping("/addpost")
-    public ModelAndView goToBlogForm(Model model) {
+    public String viewBlogForm(Model model) {
         Post post = new Post();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addPost");
-        modelAndView.addObject("post",post);
-
-
-        List<Tag> tags = tagService.getTags();
-        modelAndView.addObject("tags",tags);
-        return modelAndView;
+        List<Tag> tags = tagService.getAllTags();
+        model.addAttribute("post",post);
+        model.addAttribute("tags",tags);
+//        System.out.println(tags);
+        return "addPost";
     }
 
     @GetMapping("/savepost")
-    public String savePost(@RequestParam String title , @RequestParam String excerpt,@RequestParam String content,@RequestParam String author) {
-        System.out.println(title+ " "+excerpt+" "+content+" "+author);
-        Post post = new Post();
-        post.setTitle(title);
-        post.setExcerpt(excerpt);
-        post.setContent(content);
-        post.setAuthor(author);
-        post.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+    public String savePost(@ModelAttribute("post") Post post) {
+
+        System.out.println("in post controoler savepost");
         postService.savePost(post);
-        return "addPost";
+        return "redirect:/dashboard";
+    }
+    @RequestMapping("/delete")
+    public String deletePost(int id) {
+        postService.deletePostById(id);
+        return "redirect:/dashboard";
+    }
+    @RequestMapping("/read")
+    public String readPostById(int id,Model model) {
+        Post post = postService.readPostById(id);
+        model.addAttribute("post",post);
+        return "readPost";
     }
 }

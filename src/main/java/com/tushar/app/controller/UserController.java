@@ -39,8 +39,10 @@ public class UserController {
     @RequestMapping("/checkCredentials")
     public String verifyCredentials (@RequestParam String email , @RequestParam String password,Model model) {
         boolean isValidUser = userService.verifyCredential(email, password);
-        if (isValidUser)
+        if (isValidUser) {
             return "/dashboard";
+        }
+
         else {
             String invalidCredentialMessage = "Invalid Credentials ";
             model.addAttribute("invalidCredentialMessage",invalidCredentialMessage);

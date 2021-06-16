@@ -14,6 +14,7 @@ public class UserService {
     UserRepo userRepo;
 
 
+
     public void saveUser(User user) {
         userRepo.save(user);
     }
@@ -25,5 +26,9 @@ public class UserService {
             return true;
         else
             return false;
+    }
+    public String findUserNameById(int id) {
+        User user = userRepo.findById(id);
+        return user.getName();
     }
 }

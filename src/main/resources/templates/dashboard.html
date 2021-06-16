@@ -4,29 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .container {
+        border:1px solid black;
+        }
+
+
+
+
+
+    </style>
 </head>
 <body>
 
 <div align="right"><a href="addpost">Create Blog</a></div>
 
-<h5 th:text=${posts}></h5>
-
-
-<div>
-
-    <ul>
-
-        <div th:each="post : ${posts}">
-            <span th:text="${post.id}"></span>
-            <span th:text="${post.title}"></span>
-            <span th:text="${post.excerpt}"></span>
-            <span th:text="${post.author}"></span>
-            <span th:text="${post.publishedAt}"></span>
-            <span th:text="${post.tags}"></span>
-            <a href="update${post.id}">Update</a>
-            <a href="delete${post.id}">Delete</a>
-        </div>
-    </ul>
+<div th:each="post : ${posts}">
+    <div class="container">
+        <span th:text="${post.id}"></span><br>
+        <h3>Title:<span th:text="${post.title}"></span></h3><br>
+        Except:<span th:text="${post.excerpt}"></span><br>
+        Author:<span th:text="${post.author}"></span><br>
+        Published<span th:text="${post.publishedAt}"></span><br>
+        Tags:<span th:text="${post.tags}"></span><br>
+        <a th:href="@{/update(id=${post.id})}">Update</a><br>
+        <a th:href="@{/delete(id=${post.id})}">Delete</a><br>
+        <a th:href="@{/read(id=${post.id})}">Read</a><br>
+        <br>
+    </div>
+    <br>
 </div>
 </body>
 </html>

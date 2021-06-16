@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TagRepo extends JpaRepository<Tag, Integer> {
 
-    public List<Tag> findByPostId(int id);
+    public List<Tag> findById(int id);
 }
