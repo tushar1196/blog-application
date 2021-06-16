@@ -29,7 +29,6 @@ public class PostController {
     @RequestMapping("/dashboard")
     public String getBlogs(Model model) {
         System.out.println("in get posts");
-
         List<Post> posts = postService.getPosts();
         model.addAttribute("posts",posts);
         return "dashboard";
@@ -60,16 +59,4 @@ public class PostController {
         postService.savePost(post);
         return "addPost";
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -11,33 +11,22 @@
 
 <h5 th:text=${posts}></h5>
 
-<table border="5">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Excerpt</th>
-        <th>Author</th>
-        <th>Published Date And Time</th>
-        <th>Tags</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
 
+<div>
 
-    <tbody>
-    <tr th:each="post : ${posts}">
-        <td th:text="${post.id}"></td>
-        <td th:text="${post.title}"></td>
-        <td th:text="${post.excerpt}"></td>
-        <td th:text="${post.author}"></td>
-        <td th:text="${post.publishedAt}"></td>
-        <td th:text="${post.tags}"></td>
-        <td><a href="update${post.id}">Update</a></td>
-        <td><a href="delete${post.id}">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
+    <ul>
+
+        <div th:each="post : ${posts}">
+            <span th:text="${post.id}"></span>
+            <span th:text="${post.title}"></span>
+            <span th:text="${post.excerpt}"></span>
+            <span th:text="${post.author}"></span>
+            <span th:text="${post.publishedAt}"></span>
+            <span th:text="${post.tags}"></span>
+            <a href="update${post.id}">Update</a>
+            <a href="delete${post.id}">Delete</a>
+        </div>
+    </ul>
+</div>
 </body>
 </html>
