@@ -4,9 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .dashboard {
+
+        }
+
+
+
+    </style>
 </head>
 <body>
-in read post
-<span th:text="${post}"></span>
+<div class="dashboard" align="right"><a href="/dashboard">Home</a><br></div>
+<h5><span th:text="${post.title}"></span></h5><br>
+<h6><span th:text="${post.publishedAt}"></span></h6><br>
+<span th:text="${post.excerpt}"></span><br>
+<span th:text="${post.content}"></span><br>
+<span th:text="${post.author}"></span><br>
 </body>
 </html>

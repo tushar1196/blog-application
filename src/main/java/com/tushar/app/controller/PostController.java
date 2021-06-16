@@ -1,5 +1,6 @@
 package com.tushar.app.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.tushar.app.model.Post;
 import com.tushar.app.model.Tag;
 import com.tushar.app.service.PostService;
@@ -43,7 +44,7 @@ public class PostController {
     @GetMapping("/savepost")
     public String savePost(@ModelAttribute("post") Post post) {
 
-        System.out.println("in post controoler savepost");
+        System.out.println("in post controoler savepost"+post);
         postService.savePost(post);
         return "redirect:/dashboard";
     }
@@ -54,8 +55,20 @@ public class PostController {
     }
     @RequestMapping("/read")
     public String readPostById(int id,Model model) {
-        Post post = postService.readPostById(id);
+        Post post = postService.findPostById(id);
         model.addAttribute("post",post);
         return "readPost";
+    }
+
+    @RequestMapping("/update")
+    public String updatePost(int id,Model model) {
+        Post post = postService.findPostById(id);
+        model.addAttribute("post",post);
+        return "updatePost";
+    }
+
+    @RequestMapping("/saveEdit")
+    public void saveEdit() {
+        System.out.println("in saveEdit postcontroller");
     }
 }

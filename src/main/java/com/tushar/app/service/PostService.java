@@ -30,7 +30,6 @@ public class PostService {
 
     public void savePost(Post post) {
         post.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        post.setAuthor("Tushar");
         post.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         post.setPublished(true);
         post.setPublishedAt(Timestamp.valueOf(LocalDateTime.now()));
@@ -43,7 +42,7 @@ public class PostService {
         postsRepo.deleteById(id);
     }
 
-    public Post readPostById(int id) {
+    public Post findPostById(int id) {
         Post post = postsRepo.findById(id).get();
         return post;
     }

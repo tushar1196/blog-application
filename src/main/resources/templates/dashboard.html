@@ -22,7 +22,7 @@
 <div th:each="post : ${posts}">
     <div class="container">
         <span th:text="${post.id}"></span><br>
-        <h3>Title:<span th:text="${post.title}"></span></h3><br>
+        Title:<span th:text="${post.title}"></span><br>
         Except:<span th:text="${post.excerpt}"></span><br>
         Author:<span th:text="${post.author}"></span><br>
         Published<span th:text="${post.publishedAt}"></span><br>
