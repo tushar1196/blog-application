@@ -29,12 +29,9 @@
         margin-left: 700px;
         margin-right: 100px;
         }
-
-
-
-
-
-
+        .search {
+        margin-left: 100px;
+        }
     </style>
 </head>
 <body>
@@ -43,9 +40,17 @@
 
 <div align="center" class="addpost"><a href="addpost">Create New Blog</a></div>
 <br>
+<div class="search">
+    <form action="/search" method="get">
+        <input type="text" name="search" placeholder="Enter to search"><input type="submit" value="Search"><br>
+    </form>
+</div>
+<br>
 <div class="sort">
     <table>
-        <td><a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Sort By Published Date And Time</a></td>
+        <div>
+        <td><a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort By Published Date And Time</a></td>
+        </div>
     </table>
 </div>
 <br>
@@ -53,11 +58,11 @@
     <div class="container">
         <span th:text="${post.id}" hidden></span><br>
         <div class="inner">
-            Title:<span th:text="${post.title}"></span><br>
-            Except:<span th:text="${post.excerpt}"></span><br>
-            Author:<span th:text="${post.author}"></span><br>
-            Published<span th:text="${post.publishedAt}"></span><br>
-            Tags:<span th:text="${post.tags}"></span><br>
+            Title: <span th:text="${post.title}"></span><br>
+            Except: <span th:text="${post.excerpt}"></span><br>
+            Author: <span th:text="${post.author}"></span><br>
+            Published: <span th:text="${post.publishedAt}"></span><br>
+            Tags: <span th:text="${post.tags}"></span><br>
             <table>
                 <td><a th:href="@{/update(id=${post.id})}">Update</a></td>
                 <td><a th:href="@{/delete(id=${post.id})}">Delete</a></td>

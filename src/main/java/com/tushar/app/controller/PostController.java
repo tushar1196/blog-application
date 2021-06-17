@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -30,7 +29,8 @@ public class PostController {
     @RequestMapping("/page/{pageNo}")
     public String viewPostPaginated(@PathVariable("pageNo") int pageNo, Model model, @RequestParam("sortField") String sortField, @RequestParam("sortDirection") String sortDirection) {
         int pageSize = 5;
-        Page<Post> page = postService.findPagnatedPosts(pageNo, pageSize,sortField,sortDirection);
+
+        Page<Post> page = postService.findPaginatedPosts(pageNo, pageSize,sortField,sortDirection);
         List<Post> listPosts = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
@@ -86,5 +86,12 @@ public class PostController {
         Post post = postService.findPostById(id);
         model.addAttribute("post", post);
         return "addPost";
+    }
+
+    @RequestMapping("/search")
+    public String getPostBySearch(@RequestParam("search") String search,Model model) {
+        List<Post> posts = postService.getPostSearch(search);
+        model.addAttribute("posts",posts);
+        return "dashboard";
     }
 }
