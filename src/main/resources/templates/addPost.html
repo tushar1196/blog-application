@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="https://thymeleaf.org">
-<style></style>
+<style>
+    .element {
+    border:5px solid blue;
+        margin-left: 50px;
+        margin-right: 600px;
+    }
+    .inner {
+        margin-left: 50px;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Post</title>
 
 </head>
 <body>
-in post
-${message}
+
+<h2>Create Post</h2>
+<div class="element">
 
 <form action="/savepost" method="get" th:action="@{/savepost}" th:object=${post}>
-
-    <label>Title:</label><br>
-    <input type="text" th:field="*{id}" hidden/><br>
+<div class="inner">
+    <br>
+    <input type="text" th:field="*{id}" hidden/>
 
     <label>Title:</label><br>
     <input type="text" th:field="*{title}"/><br>
@@ -26,10 +36,12 @@ ${message}
     <input type="text" th:field="*{author}"/><br>
 
     <label>Content:</label><br>
-    <textarea type="text" th:field="*{content}" rows="10" cols="25"></textarea> <br><br>
+    <textarea type="text" th:field="*{content}" rows="10" cols="27"></textarea> <br><br>
 
     <input type="submit" value="Submit">
-
+    <br><br>
+</div>
 </form>
+</div>
 </body>
 </html>

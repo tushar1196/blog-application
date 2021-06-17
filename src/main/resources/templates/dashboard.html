@@ -6,7 +6,23 @@
     <title>Title</title>
     <style>
         .container {
-        border:1px solid black;
+        border:3px solid black;
+        margin-right: 100px;
+        margin-left: 100px;
+        }
+        .addpost {
+        border:5px solid black;
+        margin-left: 850px;
+        margin-right: 100px;
+        }
+        .table {
+        margin-left: 110px;
+        }
+        .inner {
+        margin-left: 10px;
+        }
+        .next {
+        margin-right: 150px;
         }
 
 
@@ -17,22 +33,43 @@
 </head>
 <body>
 
-<div align="right"><a href="addpost">Create Blog</a></div>
+<h1 align="center">Blog List</h1>
+
+<div align="center" class="addpost"><a href="addpost">Create New Blog</a></div>
+<br>
 
 <div th:each="post : ${posts}">
     <div class="container">
-        <span th:text="${post.id}"></span><br>
-        Title:<span th:text="${post.title}"></span><br>
-        Except:<span th:text="${post.excerpt}"></span><br>
-        Author:<span th:text="${post.author}"></span><br>
-        Published<span th:text="${post.publishedAt}"></span><br>
-        Tags:<span th:text="${post.tags}"></span><br>
-        <a th:href="@{/update(id=${post.id})}">Update</a><br>
-        <a th:href="@{/delete(id=${post.id})}">Delete</a><br>
-        <a th:href="@{/read(id=${post.id})}">Read</a><br>
-        <br>
+        <span th:text="${post.id}" hidden></span><br>
+        <div class="inner">
+            Title:<span th:text="${post.title}"></span><br>
+            Except:<span th:text="${post.excerpt}"></span><br>
+            Author:<span th:text="${post.author}"></span><br>
+            Published<span th:text="${post.publishedAt}"></span><br>
+            Tags:<span th:text="${post.tags}"></span><br>
+            <table>
+                <td><a th:href="@{/update(id=${post.id})}">Update</a></td>
+                <td><a th:href="@{/delete(id=${post.id})}">Delete</a></td>
+                <td><a th:href="@{/read(id=${post.id})}">Read</a></td>
+                <br>
+            </table>
+        </div>
     </div>
     <br>
 </div>
+<table class="table">
+
+    <div>
+        <td><a class="page-link" th:if="${currentPage > 1}" th:href="@{'/page/'+${currentPage - 1}}">Previous</a>
+            <span th:unless="${currentPage > 1}">Previous</span>
+        </td>
+    </div>
+    <div class="next">
+        <td><a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage + 1}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+        </td>
+    </div>
+    </div>
+</table>
 </body>
 </html>

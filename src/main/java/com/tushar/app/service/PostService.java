@@ -6,6 +6,10 @@ import com.tushar.app.repository.PostRepo;
 import com.tushar.app.repository.TagRepo;
 import com.tushar.app.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -23,7 +27,7 @@ public class PostService {
 
 
     public List<Post> getPosts (){
-        List<Post> posts= postsRepo.findAll();
+        List<Post> posts= postsRepo.findAll();//findAllByTitleContaining(name);
         System.out.println("in service class");
         return posts;
     }
@@ -47,6 +51,12 @@ public class PostService {
     public Post findPostById(int id) {
         Post post = postsRepo.findById(id).get();
         return post;
+    }
+
+    public Page<Post> findPagnatedPosts(int pageNo,int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? 
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return postsRepo.findAll(pageable);
     }
 
 }

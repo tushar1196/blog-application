@@ -4,12 +4,14 @@ import com.tushar.app.model.Post;
 import com.tushar.app.model.Tag;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -22,10 +24,21 @@ public class PostController {
 
     @RequestMapping("/dashboard")
     public String getBlogs(Model model) {
-        System.out.println("in get posts");
-        List<Post> posts = postService.getPosts();
-        model.addAttribute("posts",posts);
+        return viewPostPaginated(1,model);
+    }
+
+    @RequestMapping("/page/{pageNo}")
+    public String viewPostPaginated(@PathVariable("pageNo") int pageNo ,Model model) {
+        int pageSize=5;
+        Page<Post> page = postService.findPagnatedPosts(pageNo,pageSize);
+        List<Post> listPosts = page.getContent();
+
+        model.addAttribute("currentPage",pageNo);
+        model.addAttribute("totalPages",page.getTotalPages());
+        model.addAttribute("totalItems",page.getTotalElements());
+        model.addAttribute("posts",listPosts);
         return "dashboard";
+
     }
 
     @RequestMapping("/addpost")
