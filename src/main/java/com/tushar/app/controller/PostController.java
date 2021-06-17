@@ -1,6 +1,5 @@
 package com.tushar.app.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.tushar.app.model.Post;
 import com.tushar.app.model.Tag;
 import com.tushar.app.service.PostService;
@@ -10,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -61,14 +58,9 @@ public class PostController {
     }
 
     @RequestMapping("/update")
-    public String updatePost(int id,Model model) {
+    public String updatePost(@RequestParam("id") int id,Model model) {
         Post post = postService.findPostById(id);
         model.addAttribute("post",post);
-        return "updatePost";
-    }
-
-    @RequestMapping("/saveEdit")
-    public void saveEdit() {
-        System.out.println("in saveEdit postcontroller");
+        return "addPost";
     }
 }

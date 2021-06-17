@@ -29,10 +29,12 @@ public class PostService {
     }
 
     public void savePost(Post post) {
-        post.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        if(post.getCreatedAt()==null) {
+            post.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+            post.setPublishedAt(Timestamp.valueOf(LocalDateTime.now()));
+        }
         post.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         post.setPublished(true);
-        post.setPublishedAt(Timestamp.valueOf(LocalDateTime.now()));
         postsRepo.save(post);
         System.out.println("in post service savepost");
     }
@@ -46,4 +48,5 @@ public class PostService {
         Post post = postsRepo.findById(id).get();
         return post;
     }
+
 }

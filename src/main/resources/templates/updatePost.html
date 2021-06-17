@@ -11,7 +11,7 @@
 in post
 ${message}
 
-<form action="/saveEdit" method="get" th:action="@{/saveEdit}" th:object=${post}>
+<form action="" method="get" th:action="@{/saveEdit(id=${post.id})}" th:object=${post}>
 
 
     <label>Title:</label><br>

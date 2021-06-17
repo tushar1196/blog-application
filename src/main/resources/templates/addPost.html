@@ -13,19 +13,20 @@ ${message}
 
 <form action="/savepost" method="get" th:action="@{/savepost}" th:object=${post}>
 
-
+    <label>Title:</label><br>
+    <input type="text" th:field="*{id}" hidden/><br>
 
     <label>Title:</label><br>
-    <input type="text" th:field="*{title}" /><br>
+    <input type="text" th:field="*{title}"/><br>
 
     <label>Excerpt:</label><br>
-    <input type="text" th:field="*{excerpt}" /><br>
+    <input type="text" th:field="*{excerpt}"/><br>
 
-    <label >Author:</label><br>
-    <input type="text"  th:field="*{author}" /><br>
+    <label>Author:</label><br>
+    <input type="text" th:field="*{author}"/><br>
 
-    <label >Content:</label><br>
-    <textarea type="text" th:field="*{content}" rows="10" cols="25" ></textarea> <br><br>
+    <label>Content:</label><br>
+    <textarea type="text" th:field="*{content}" rows="10" cols="25"></textarea> <br><br>
 
     <input type="submit" value="Submit">
 
