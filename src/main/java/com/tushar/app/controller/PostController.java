@@ -24,29 +24,38 @@ public class PostController {
 
     @RequestMapping("/dashboard")
     public String getBlogs(Model model) {
-        return viewPostPaginated(1,model);
+        return viewPostPaginated(1, model,"title","asc");
     }
 
     @RequestMapping("/page/{pageNo}")
-    public String viewPostPaginated(@PathVariable("pageNo") int pageNo ,Model model) {
-        int pageSize=5;
-        Page<Post> page = postService.findPagnatedPosts(pageNo,pageSize);
+    public String viewPostPaginated(@PathVariable("pageNo") int pageNo, Model model, @RequestParam("sortField") String sortField, @RequestParam("sortDirection") String sortDirection) {
+        int pageSize = 5;
+        Page<Post> page = postService.findPagnatedPosts(pageNo, pageSize,sortField,sortDirection);
         List<Post> listPosts = page.getContent();
 
-        model.addAttribute("currentPage",pageNo);
-        model.addAttribute("totalPages",page.getTotalPages());
-        model.addAttribute("totalItems",page.getTotalElements());
-        model.addAttribute("posts",listPosts);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField",sortField);
+        model.addAttribute("sortDirection",sortDirection);
+        model.addAttribute("reverseSortDirection",sortDirection.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("posts", listPosts);
         return "dashboard";
 
     }
-
     @RequestMapping("/addpost")
+    public String viewForm(Model model) {
+        return viewBlogForm(model);
+    }
+
+    @RequestMapping("/page/addpost")
     public String viewBlogForm(Model model) {
         Post post = new Post();
         List<Tag> tags = tagService.getAllTags();
-        model.addAttribute("post",post);
-        model.addAttribute("tags",tags);
+        model.addAttribute("post", post);
+        model.addAttribute("tags", tags);
 //        System.out.println(tags);
         return "addPost";
     }
@@ -54,26 +63,28 @@ public class PostController {
     @GetMapping("/savepost")
     public String savePost(@ModelAttribute("post") Post post) {
 
-        System.out.println("in post controoler savepost"+post);
+        System.out.println("in post controoler savepost" + post);
         postService.savePost(post);
         return "redirect:/dashboard";
     }
+
     @RequestMapping("/delete")
     public String deletePost(int id) {
         postService.deletePostById(id);
         return "redirect:/dashboard";
     }
+
     @RequestMapping("/read")
-    public String readPostById(int id,Model model) {
+    public String readPostById(int id, Model model) {
         Post post = postService.findPostById(id);
-        model.addAttribute("post",post);
+        model.addAttribute("post", post);
         return "readPost";
     }
 
     @RequestMapping("/update")
-    public String updatePost(@RequestParam("id") int id,Model model) {
+    public String updatePost(@RequestParam("id") int id, Model model) {
         Post post = postService.findPostById(id);
-        model.addAttribute("post",post);
+        model.addAttribute("post", post);
         return "addPost";
     }
 }

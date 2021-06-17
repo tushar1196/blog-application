@@ -54,8 +54,9 @@ public class PostService {
     }
 
     public Page<Post> findPagnatedPosts(int pageNo,int pageSize, String sortField, String sortDirection) {
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? 
-        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,sort);
         return postsRepo.findAll(pageable);
     }
 
