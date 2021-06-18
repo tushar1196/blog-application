@@ -2,7 +2,6 @@ package com.tushar.app.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity(name="Tags")
 public class Tag {
@@ -13,8 +12,6 @@ public class Tag {
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @ManyToMany(mappedBy = "tags")
-    private List<Post> posts;
 
     public int getId() {
         return id;
@@ -48,13 +45,7 @@ public class Tag {
         this.updatedAt = updatedAt;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
 
     @Override
     public String toString() {
@@ -63,7 +54,6 @@ public class Tag {
                 ", name='" + name + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", posts=" + posts +
                 '}';
     }
 }

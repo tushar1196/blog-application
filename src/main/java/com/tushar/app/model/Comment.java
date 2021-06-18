@@ -15,16 +15,6 @@ public class Comment {
     private int postId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @OneToMany(mappedBy = "comments")
-    private Post post;
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
 
     public int getId() {
         return id;
@@ -92,7 +82,6 @@ public class Comment {
                 ", postId=" + postId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", post=" + post +
                 '}';
     }
 }

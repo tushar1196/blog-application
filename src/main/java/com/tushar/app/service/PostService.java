@@ -30,7 +30,6 @@ public class PostService {
         System.out.println("in post service savepost");
     }
 
-
     public void deletePostById(int id) {
         postsRepo.deleteById(id);
     }
