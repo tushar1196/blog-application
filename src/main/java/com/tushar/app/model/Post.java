@@ -12,6 +12,9 @@ public class Post {
     private int id;
     private String title;
     private String excerpt;
+
+
+
     private String content;
     private String author;
     private Timestamp publishedAt;
@@ -20,6 +23,8 @@ public class Post {
     private Timestamp updatedAt;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     public int getId() {
         return id;
@@ -101,18 +106,28 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
-        return "Posts{" +
+        return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", excerpt='" + excerpt + '\'' +
                 ", content='" + content + '\'' +
                 ", author='" + author + '\'' +
-                ", published_at=" + publishedAt +
-                ", is_published=" + isPublished +
-                ", created_at=" + createdAt +
-                ", updated_at=" + updatedAt +
+                ", publishedAt=" + publishedAt +
+                ", isPublished=" + isPublished +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", tags=" + tags +
+                ", comments=" + comments +
                 '}';
     }
 }

@@ -48,13 +48,22 @@ public class Tag {
         this.updatedAt = updatedAt;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
     @Override
     public String toString() {
-        return "Tags{" +
+        return "Tag{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", created_at=" + createdAt +
-                ", updated_at=" + updatedAt +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", posts=" + posts +
                 '}';
     }
 }

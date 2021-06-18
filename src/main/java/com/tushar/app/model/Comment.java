@@ -1,9 +1,6 @@
 package com.tushar.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name="Comments")
@@ -18,6 +15,16 @@ public class Comment {
     private int postId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @OneToMany(mappedBy = "comments")
+    private Post post;
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
     public int getId() {
         return id;
@@ -77,7 +84,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comments{" +
+        return "Comment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
@@ -85,6 +92,7 @@ public class Comment {
                 ", postId=" + postId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", post=" + post +
                 '}';
     }
 }
