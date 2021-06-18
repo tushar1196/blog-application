@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Give Comment</title>
+    <style>
+        .element {
+    border:5px solid blue;
+        margin-left: 50px;
+        margin-right: 600px;
+    }
+    .inner {
+        margin-left: 50px;
+    }
+
+
+    </style>
+
+</head>
+<body>
+<h1>Give Comments</h1>
+<div class="element">
+
+    <form action="/saveComment" method="post" th:action="@{/saveComment}" th:object=${comment}>
+        <div class="inner">
+            <br>
+            <input type="text" th:field="*{id}" hidden>
+
+            <label>User Name:</label><br>
+            <input type="text" th:field="*{name}"/><br/>
+
+            <label>User E-mail:</label><br>
+            <input type="text" th:field="*{email}"/><br/>
+
+            <label>Comment:</label><br>
+            <input type="text" th:field="*{comment}"/><br/>
+
+            <input type="text" th:field="*{postId}" hidden/><br/>
+
+            <input type="submit" value="Save Comment"><br><br>
+        </div>
+    </form>
+</div>
+</body>
+</html>
