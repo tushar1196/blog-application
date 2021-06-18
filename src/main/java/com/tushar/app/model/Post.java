@@ -18,7 +18,7 @@ public class Post {
     private boolean isPublished;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
 
     public int getId() {

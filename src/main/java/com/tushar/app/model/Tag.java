@@ -1,10 +1,8 @@
 package com.tushar.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity(name="Tags")
 public class Tag {
@@ -15,6 +13,8 @@ public class Tag {
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @ManyToMany(mappedBy = "tags")
+    private List<Post> posts;
 
     public int getId() {
         return id;

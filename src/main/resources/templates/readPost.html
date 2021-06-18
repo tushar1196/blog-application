@@ -6,19 +6,35 @@
     <title>Title</title>
     <style>
         .dashboard {
-
+        border:5px solid blue;
+        margin-left: 800px;
+        margin-right: 100px;
         }
-
-
-
+        .outer {
+        border:5px solid black;
+        margin-left: 100px;
+        margin-right: 100px;
+        }
     </style>
 </head>
 <body>
-<div class="dashboard" align="right"><a href="/dashboard">Home</a><br></div>
-<h5><span th:text="${post.title}"></span></h5><br>
-<h6><span th:text="${post.publishedAt}"></span></h6><br>
-<span th:text="${post.excerpt}"></span><br>
-<span th:text="${post.content}"></span><br>
-<span th:text="${post.author}"></span><br>
+<div class="dashboard" align="center"><br><a href="/dashboard">Home</a><br><br></div>
+<br><br>
+<div class="outer" align="center">
+    <div align="center"><h1><span th:text="${post.title}"></span></h1><br></div>
+    <table>
+        <tr>
+            <td>
+                <span th:text="${post.author}"></span>
+            </td>
+            <td>
+                <span th:text="${post.publishedAt}"></span>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <span th:text="${post.content}"></span><br>
+    <br><br>
+</div>
 </body>
 </html>
