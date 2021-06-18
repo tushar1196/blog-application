@@ -22,7 +22,7 @@
 <h1>Give Comments</h1>
 <div class="element">
 
-    <form action="/saveComment" method="post" th:action="@{/saveComment}" th:object=${comment}>
+    <form action="/saveComment" method="get" th:action="@{/saveComment}" th:object="${comment}">
         <div class="inner">
             <br>
             <input type="text" th:field="*{id}" hidden>
@@ -34,7 +34,7 @@
             <input type="text" th:field="*{email}"/><br/>
 
             <label>Comment:</label><br>
-            <input type="text" th:field="*{comment}"/><br/>
+            <input type="text" th:field="*{oneComment}"/><br/>
 
             <input type="text" th:field="*{postId}" hidden/><br/>
 

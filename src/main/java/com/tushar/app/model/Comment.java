@@ -11,7 +11,7 @@ public class Comment {
     private int id;
     private String name;
     private String email;
-    private String comment;
+    private String oneComment;
     private int postId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -40,12 +40,12 @@ public class Comment {
         this.email = email;
     }
 
-    public String getComment() {
-        return comment;
+    public String getOneComment() {
+        return oneComment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setOneComment(String oneComment) {
+        this.oneComment = oneComment;
     }
 
     public int getPostId() {
@@ -78,7 +78,7 @@ public class Comment {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", comment='" + comment + '\'' +
+                ", comment='" + oneComment + '\'' +
                 ", postId=" + postId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

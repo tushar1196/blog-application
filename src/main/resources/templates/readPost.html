@@ -16,6 +16,7 @@
         margin-right: 100px;
         }
 
+
     </style>
 </head>
 <body>
@@ -38,24 +39,60 @@
     <br><br>
 </div>
 <div align="center">
-    <table>
-        <tr>
-            <td>
-                <span th:text="${post.tags}"></span><br>
-            </td>
-            <td>
-                <span th:text="${post.comments}"></span><a href="/addComment">Add Comment</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Edit tags
-            </td>
-            <td>
-                Add Comments
-            </td>
-        </tr>
-    </table>
+    <span th:text="${post.tags}"></span><br>
+    Edit tags
 </div>
+<div align="center">
+    <h1>Add Comments</h1>
+    <div id="inner" th:each="comment: ${post.comments}">
+        <table border="2">
+            <thead>
+            <tr>
+                <td>User Name</td>
+                <td>User Email</td>
+                <td>Comment</td>
+                <td>Post On</td>
+                <td>Update</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><snap th:text="${comment.name}"></snap></td>
+                <td><snap th:text="${comment.email}"></snap></td>
+                <td><snap th:text="${comment.oneComment}"></snap></td>
+                <td><snap th:text="${comment.createdAt}"></snap></td>
+                <td><a th:href="@{read/update(id=${comment.id})}">Update</a></td>
+                <td><a th:href="@{read/delete(id=${comment.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <a th:href="@{'/addComment/'+ ${post.id}}">Add Comment</a>
+</div>
+
+
 </body>
 </html>

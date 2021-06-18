@@ -1,7 +1,9 @@
 package com.tushar.app.controller;
 
+import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
 import com.tushar.app.model.Tag;
+import com.tushar.app.service.CommentService;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,8 @@ public class PostController {
     PostService postService;
     @Resource
     TagService tagService;
+    @Resource
+    CommentService commentService;
 
 
     @RequestMapping("/dashboard")
@@ -77,6 +81,8 @@ public class PostController {
     @RequestMapping("/read")
     public String readPostById(int id, Model model) {
         Post post = postService.findPostById(id);
+        List<Comment> comments = commentService.findAllByPostId(id);
+        post.setComments(comments);
         model.addAttribute("post", post);
         return "readPost";
     }
