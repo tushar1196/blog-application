@@ -62,7 +62,6 @@
             Except: <span th:text="${post.excerpt}"></span><br>
             Author: <span th:text="${post.author}"></span><br>
             Published: <span th:text="${post.publishedAt}"></span><br>
-            Tags: <span th:text="${post.tags}"></span><br>
             <table>
                 <td><a th:href="@{/update(id=${post.id})}">Update</a></td>
                 <td><a th:href="@{/delete(id=${post.id})}">Delete</a></td>

@@ -49,4 +49,9 @@ public class PostService {
         return postsRepo.findAllByTitleContaining(search);
     }
 
+//    public Post findByTitle(String title) {
+//        Post byTitle = postsRepo.findByTitle(title);
+//
+//    }
+
 }

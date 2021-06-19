@@ -11,4 +11,6 @@ public interface PostRepo extends JpaRepository<Post,Integer> {
     @Query(value = "select * from posts where title like %?1% or author like %?1% or content like %?1%" , nativeQuery = true)
     List<Post> findAllByTitleContaining(String search);
 
+    public Post findByTitle(String title);
+
 }

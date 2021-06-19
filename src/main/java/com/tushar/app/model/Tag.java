@@ -3,7 +3,7 @@ package com.tushar.app.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name="Tags")
+@Entity(name = "Tags")
 public class Tag {
 
     @Id
@@ -12,6 +12,7 @@ public class Tag {
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private int postId;
 
     public int getId() {
         return id;
@@ -45,7 +46,13 @@ public class Tag {
         this.updatedAt = updatedAt;
     }
 
+    public int getPostId() {
+        return postId;
+    }
 
+    public void setPostId(int postId) {
+        this.postId = postId;
+    }
 
     @Override
     public String toString() {
@@ -54,6 +61,7 @@ public class Tag {
                 ", name='" + name + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", postId=" + postId +
                 '}';
     }
 }

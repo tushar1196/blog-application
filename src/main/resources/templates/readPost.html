@@ -15,6 +15,9 @@
         margin-left: 100px;
         margin-right: 100px;
         }
+        .tag {
+        border:1px solid black;
+        }
 
     </style>
 </head>
@@ -38,8 +41,20 @@
     <br><br>
 </div>
 <div align="center">
-    <span th:text="${post.tags}"></span><br>
-    Edit tags
+    <h1>Tags</h1>
+    <table>
+        <tbody>
+        <tr align="center">
+            <div id="tagInner" th:each="tag: ${post.tags}">
+                <td>
+                    <div class="tag">
+                        <snap th:text="${tag.name}"></snap>
+                    </div>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <div align="center">
     <h1>Comments</h1>
@@ -55,7 +70,7 @@
             <td>Delete</td>
         </tr>
         </thead>
-        <div id="inner" th:each="comment: ${post.comments}">
+        <div id="commentsInner" th:each="comment: ${post.comments}">
             <tbody>
             <tr align="center">
                 <td>

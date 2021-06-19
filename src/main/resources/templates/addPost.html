@@ -21,7 +21,7 @@
 <h2>Create Post</h2>
 <div class="element">
 
-<form action="/savepost" method="get" th:action="@{/savepost}" th:object=${post}>
+<form action="/savepost" method="post" th:action="@{/savepost}" th:object=${post}>
 <div class="inner">
     <br>
     <input type="text" th:field="*{id}" hidden/>
@@ -36,7 +36,11 @@
     <input type="text" th:field="*{author}"/><br>
 
     <label>Content:</label><br>
-    <textarea type="text" th:field="*{content}" rows="10" cols="27"></textarea> <br><br>
+    <textarea type="text" th:field="*{content}" rows="10" cols="27"></textarea> <br>
+
+    <label>Tags:</label><br>
+    <input type="text" name="helperTags" placeholder="Enter Tags With , Separated "/><br><br>
+
 
     <input type="submit" value="Submit">
     <br><br>
