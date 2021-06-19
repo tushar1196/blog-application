@@ -18,9 +18,9 @@ public class Post {
     private boolean isPublished;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @ManyToMany(/*cascade = CascadeType.ALL*/)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
-    @OneToMany(/*cascade = CascadeType.ALL*/)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @Override

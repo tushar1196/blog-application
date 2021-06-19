@@ -14,10 +14,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/read")
 public class CommentController {
 
-    private int postId;
     @Resource
     CommentService commentService;
 
@@ -31,13 +29,21 @@ public class CommentController {
 
     @RequestMapping("/saveComment")
     public String saveComment(@ModelAttribute("comment") Comment comment) {
-        this.postId=comment.getPostId();
         System.out.println("CommentController saveComment"+comment);
         commentService.saveComment(comment);
-        return "redirect:/read/?id="+postId;
+        return "redirect:/read/?id="+comment.getPostId();
     }
-    @RequestMapping("/updateComment/{postId}")
-    public String updateComment() {
-        return null;
+    @RequestMapping("/read/updateComment")
+    public String updateComment(int id,Model model) {
+        Comment comment = commentService.findById(id);
+        model.addAttribute(comment);
+        return "addCommentForm";
+    }
+    @RequestMapping("/read/deleteComment")
+    public String delete(int id) {
+        System.out.println("in comment controller before delete");
+        commentService.deleteById(id);
+        System.out.println("in comment controller after delete");
+        return "redirect:/dashboard";
     }
 }

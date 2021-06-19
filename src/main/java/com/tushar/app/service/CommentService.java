@@ -27,4 +27,13 @@ public class CommentService {
     public List<Comment> findAllByPostId(int postId){
         return commentRepo.findAllByPostId(postId);
     }
+
+    public void deleteById(int id) {
+        commentRepo.deleteById(id);
+    }
+
+    public Comment findById(int id) {
+        Comment comment = commentRepo.findById(id).get();
+        return comment;
+    }
 }
