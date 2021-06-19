@@ -64,9 +64,8 @@ public class PostController {
 
     @RequestMapping("/savepost")
     public String savePost(@RequestParam("helperTags") String helperTags, @ModelAttribute("post") Post post) {
-        System.out.println("in post controoler savepost tags are" + helperTags);
-        System.out.println("in post controoler savepost" + post);
         postService.savePost(post);
+        System.out.println("in save blog "+ post.getId());
         tagService.saveTag(helperTags,post.getId());
         return "redirect:/dashboard";
     }
