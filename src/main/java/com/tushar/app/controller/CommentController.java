@@ -34,7 +34,7 @@ public class CommentController {
     @RequestMapping("/saveComment/Update/{postId}")
     public String saveUpdateComment(@ModelAttribute("comment") Comment comment, @PathVariable int postId) {
         System.out.println("CommentController saveComment" + comment);
-        commentService.saveUpdateComment(comment, postId);
+        commentService.saveUpdateComment(comment);
         return "redirect:/read/?id=" + postId;
     }
 

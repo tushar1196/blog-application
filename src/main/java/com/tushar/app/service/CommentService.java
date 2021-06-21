@@ -28,7 +28,7 @@ public class CommentService {
         postRepo.save(post);
     }
 
-    public void saveUpdateComment(Comment comment, int postId) {
+    public void saveUpdateComment(Comment comment) {
         comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         commentRepo.save(comment);
     }
