@@ -84,7 +84,7 @@ public class PostController {
 
     @RequestMapping("/search")
     public String getPostBySearch(@RequestParam("search") String search, Model model) {
-        List<Post> posts = postService.getPostSearch(search);
+        List<Post> posts = postService.findBySearchKeyword(search);
         model.addAttribute("posts", posts);
         return "dashboard";
     }

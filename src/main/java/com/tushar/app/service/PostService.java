@@ -61,8 +61,8 @@ public class PostService {
         return postsRepo.findAll(pageable);
     }
 
-    public List<Post> getPostSearch(String search) {
-        return postsRepo.findAllByTitleContaining(search);
+    public List<Post> findBySearchKeyword(String search) {
+        return postsRepo.findAllBySearch(search);
     }
 
 }
