@@ -35,7 +35,7 @@ public class CommentController {
         Comment comment = commentService.findById(commentId);
         model.addAttribute("comment", comment);
         model.addAttribute("postId", postId);
-        return "updateCommentForm";
+        return "updateComment";
     }
 
     @RequestMapping("/read/deleteComment/{commentId}/{postId}")
