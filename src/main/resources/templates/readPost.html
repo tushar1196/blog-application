@@ -108,7 +108,7 @@
     </table>
     <h1>Give Comments</h1>
     <div class="element">
-        <form action="" method="get" th:action="@{'/saveComment/'+${postId}}" th:object="${comment}">
+        <form action="" method="post" th:action="@{'/saveComment/'+${postId}}" th:object="${comment}">
             <div class="inner">
                 <br>
                 <input type="text" th:field="*{id}" hidden>
