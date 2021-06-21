@@ -32,9 +32,9 @@
         .search {
         margin-left: 100px;
         }
-
-
-
+        .clear {
+        margin-left: 200px;
+        }
     </style>
 </head>
 <body>
@@ -45,16 +45,15 @@
 <br>
 <div class="sort">
     <table>
-            <td>
-                <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
-                    By Published Date And Time</a></td>
+        <td>
+            <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
+                By Published Date And Time</a></td>
     </table>
 </div>
 <br>
 <div class="search">
     <form action="/search" method="get">
         <input type="text" name="search" placeholder="Enter to search"><input type="submit" value="Search">
-        <form action="/dashboard"><input type="submit" value="Clear"></form>
         <br>
         Select to filter :
         <select name="filter">
@@ -72,8 +71,9 @@
             </option>
         </select>
     </form>
+    <form action="/dashboard"><input type="submit" value="Reset"></form>
 </div>
-<br>
+<br><br>
 <div th:each="post : ${posts}">
     <div class="container">
         <span th:text="${post.id}" hidden></span><br>
