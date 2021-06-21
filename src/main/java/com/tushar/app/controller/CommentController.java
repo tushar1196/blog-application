@@ -38,11 +38,11 @@ public class CommentController {
         return "updateCommentForm";
     }
 
-    @RequestMapping("/read/deleteComment")
-    public String delete(int id) {
+    @RequestMapping("/read/deleteComment/{commentId}/{postId}")
+    public String delete(@PathVariable("commentId") int commentId , @PathVariable("postId") int postId ) {
         System.out.println("in comment controller before delete");
-        commentService.deleteById(id);
+        commentService.deleteById(commentId);
         System.out.println("in comment controller after delete");
-        return "redirect:/dashboard";
+        return "redirect:/read/?id=" + postId;
     }
 }

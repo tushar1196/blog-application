@@ -100,7 +100,7 @@
                     <a th:href="@{'/read/updateComment/'+${comment.id}+'/'+${post.id}}">Update</a>
                 </td>
                 <td>
-                    <a th:href="@{/read/deleteComment/(id=${comment.id})}">Delete</a>
+                    <a th:href="@{'/read/deleteComment/'+${comment.id}+'/'+${post.id}}">Delete</a>
                 </td>
             </tr>
             </tbody>

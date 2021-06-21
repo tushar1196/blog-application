@@ -31,13 +31,10 @@
             <label>User E-mail:</label><br>
             <input type="text" th:field="*{email}" required/><br/>
 
-<!--            <label>User E-mail:</label><br>-->
             <input type="text" th:field="*{createdAt}" hidden/><br/>
 
             <label>Comment:</label><br>
             <input type="text" th:field="*{oneComment}" required/><br/>
-
-            <input type="text" th:text="${postId}" hidden/><br/>
 
             <input type="submit" value="Save Comment"><br><br>
         </div>
