@@ -38,7 +38,6 @@ public class CommentService {
     }
 
     public Comment findById(int id) {
-        Comment comment = commentRepo.findById(id).get();
-        return comment;
+        return commentRepo.findById(id).get();
     }
 }

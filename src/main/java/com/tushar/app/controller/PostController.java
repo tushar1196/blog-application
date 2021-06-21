@@ -1,8 +1,8 @@
 package com.tushar.app.controller;
 
 import com.tushar.app.model.Post;
-import com.tushar.app.service.CommentService;
 import com.tushar.app.service.PostService;
+import com.tushar.app.service.TagService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +17,7 @@ public class PostController {
     @Resource
     PostService postService;
     @Resource
-    CommentService commentService;
-
+    TagService tagService;
 
     @RequestMapping("/dashboard")
     public String getBlogs(Model model) {
@@ -40,23 +39,24 @@ public class PostController {
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
 
+        model.addAttribute("tags",tagService.findAllTags());
         model.addAttribute("posts", listPosts);
         return "dashboard";
     }
 
-    @RequestMapping("/addpost")
+    @RequestMapping("/addPost")
     public String viewForm(Model model) {
         return viewBlogForm(model);
     }
 
-    @RequestMapping("/page/addpost")
+    @RequestMapping("/page/addPost")
     public String viewBlogForm(Model model) {
         Post post = new Post();
         model.addAttribute("post", post);
         return "addPost";
     }
 
-    @RequestMapping("/savepost")
+    @RequestMapping("/savePost")
     public String savePost(@RequestParam("helperTags") String helperTags, @ModelAttribute("post") Post post) {
         postService.savePost(post, helperTags);
         return "redirect:/dashboard";

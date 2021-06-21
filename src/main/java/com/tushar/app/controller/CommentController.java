@@ -2,7 +2,6 @@ package com.tushar.app.controller;
 
 import com.tushar.app.model.Comment;
 import com.tushar.app.service.CommentService;
-import com.tushar.app.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,8 +15,6 @@ public class CommentController {
 
     @Resource
     CommentService commentService;
-    @Resource
-    PostService postService;
 
     @RequestMapping("/addComment/{postId}")
     public String addComment(Model model, @PathVariable int postId) {
