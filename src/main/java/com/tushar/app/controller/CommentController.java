@@ -16,14 +16,6 @@ public class CommentController {
     @Resource
     CommentService commentService;
 
-//    @RequestMapping("/addComment/{postId}")
-//    public String addComment(Model model, @PathVariable int postId) {
-//        Comment comment = new Comment();
-//        model.addAttribute("comment", comment);
-//        model.addAttribute("postId", postId);
-//        return "addCommentForm";
-//    }
-
     @RequestMapping("/saveComment/{postId}")
     public String saveComment(@ModelAttribute("comment") Comment comment, @PathVariable int postId) {
         System.out.println("CommentController saveComment" + comment);
