@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService /*implements UserDetailsService*/ {
 
     @Autowired
     UserRepo userRepo;
@@ -25,4 +25,16 @@ public class UserService {
         User user = userRepo.findById(id);
         return user.getName();
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+//
+//        User user = userRepo.findByName(userName);
+//        if(user==null) {
+//            throw new UsernameNotFoundException("User Not Found");
+//        }
+//
+//
+//        return null;
+//    }
 }

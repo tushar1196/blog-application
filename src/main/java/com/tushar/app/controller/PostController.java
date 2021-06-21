@@ -1,5 +1,6 @@
 package com.tushar.app.controller;
 
+import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
@@ -71,6 +72,9 @@ public class PostController {
     @RequestMapping("/read")
     public String readPostById(int id, Model model) {
         Post post = postService.findPostById(id);
+        Comment comment = new Comment();
+        model.addAttribute("comment", comment);
+        model.addAttribute("postId", id);
         model.addAttribute("post", post);
         return "readPost";
     }

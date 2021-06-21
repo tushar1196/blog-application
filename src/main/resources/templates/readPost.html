@@ -18,6 +18,17 @@
         .tag {
         border:1px solid black;
         }
+            .element {
+    border:5px solid blue;
+        margin-left: 50px;
+        margin-right: 600px;
+    }
+    .inner {
+        margin-left: 50px;
+    }
+
+
+
 
     </style>
 </head>
@@ -58,7 +69,7 @@
 </div>
 <div align="center">
     <h1>Comments</h1>
-    <div align="right"><a th:href="@{'/addComment/'+ ${post.id}}">Add New Comment</a></div>
+    <!--    <div align="right"><a th:href="@{'/addComment/'+ ${post.id}}">Add New Comment</a></div>-->
     <table border="2" cellpadding="5">
         <thead>
         <tr align="center">
@@ -95,6 +106,26 @@
             </tbody>
         </div>
     </table>
+    <h1>Give Comments</h1>
+    <div class="element">
+        <form action="" method="get" th:action="@{'/saveComment/'+${postId}}" th:object="${comment}">
+            <div class="inner">
+                <br>
+                <input type="text" th:field="*{id}" hidden>
+
+                <label>User Name:</label><br>
+                <input type="text" th:field="*{name}" required/><br/>
+
+                <label>User E-mail:</label><br>
+                <input type="text" th:field="*{email}" required/><br/>
+
+                <label>Comment:</label><br>
+                <input type="text" th:field="*{oneComment}" required/><br/>
+                <br>
+                <input type="submit" value="Save Comment"><br><br>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
