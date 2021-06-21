@@ -2,12 +2,10 @@ package com.tushar.app.repository;
 
 import com.tushar.app.model.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface TagRepo extends JpaRepository<Tag, Integer> {
 
-    public List<Tag> findById(int id);
     public Tag findByName(String name);
-    public List<Tag> findByPostId(int id);
 }

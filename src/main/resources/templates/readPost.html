@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Post</title>
     <style>
         .dashboard {
         border:5px solid blue;
@@ -59,7 +59,7 @@
 <div align="center">
     <h1>Comments</h1>
     <div align="right"><a th:href="@{'/addComment/'+ ${post.id}}">Add New Comment</a></div>
-    <table border="2">
+    <table border="2" cellpadding="5">
         <thead>
         <tr align="center">
             <td>User Name</td>
@@ -86,7 +86,7 @@
                     <snap th:text="${comment.createdAt}"></snap>
                 </td>
                 <td>
-                    <a th:href="@{/read/updateComment/(id=${comment.id})}">Update</a>
+                    <a th:href="@{'/read/updateComment/'+${comment.id}+'/'+${post.id}}">Update</a>
                 </td>
                 <td>
                     <a th:href="@{/read/deleteComment/(id=${comment.id})}">Delete</a>

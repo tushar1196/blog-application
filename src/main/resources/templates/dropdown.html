@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/display}" method="POST">
+  <div class="container">
+    <p><strong>Select Hobbies(Multiple):</strong>
+      <select  id="multiple-hobbies" multiple="multiple">
+        <option value="reading">Reading</option>
+        <option value="cricket">Cricket</option>
+        <option value="cooking">Cooking</option>
+        <option value="movies">Watching Movies</option>
+        <option value="music">Listening Music</option>
+        <option value="sleeping">Sleeping</option>
+      </select>
+    </p>
+    <input type="submit" value="submit"/>
+  </div>
+
+
+</form>
+
+</body>
+</html>

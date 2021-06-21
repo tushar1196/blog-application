@@ -2,6 +2,8 @@ package com.tushar.app.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Tags")
 public class Tag {
@@ -9,10 +11,15 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(columnDefinition = "TEXT")
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private int postId;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tags")
+    private Set<Post> posts = new HashSet<>();
+
+    public Tag() {
+    }
 
     public int getId() {
         return id;
@@ -46,12 +53,12 @@ public class Tag {
         this.updatedAt = updatedAt;
     }
 
-    public int getPostId() {
-        return postId;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
@@ -61,7 +68,7 @@ public class Tag {
                 ", name='" + name + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", postId=" + postId +
+                ", posts=" + posts +
                 '}';
     }
 }

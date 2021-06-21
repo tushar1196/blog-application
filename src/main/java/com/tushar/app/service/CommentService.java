@@ -1,31 +1,36 @@
 package com.tushar.app.service;
 
 import com.tushar.app.model.Comment;
+import com.tushar.app.model.Post;
 import com.tushar.app.repository.CommentRepo;
+import com.tushar.app.repository.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class CommentService {
 
     @Autowired
     CommentRepo commentRepo;
+    @Autowired
+    PostRepo postRepo;
 
-    public void saveComment(Comment comment) {
-        if(comment.getCreatedAt()==null) {
+    public void saveComment(Comment comment, int postId) {
+        if (comment.getCreatedAt() == null) {
             comment.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         }
         comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        commentRepo.save(comment);
-        System.out.println("in comment service saveComment");
+        Post post = postRepo.findById(postId).get();
+        post.getComments().add(comment);
+        postRepo.save(post);
     }
 
-    public List<Comment> findAllByPostId(int postId){
-        return commentRepo.findAllByPostId(postId);
+    public void saveUpdateComment(Comment comment, int postId) {
+        comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        commentRepo.save(comment);
     }
 
     public void deleteById(int id) {

@@ -1,11 +1,8 @@
 package com.tushar.app.controller;
 
-import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
-import com.tushar.app.model.Tag;
 import com.tushar.app.service.CommentService;
 import com.tushar.app.service.PostService;
-import com.tushar.app.service.TagService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class PostController {
 
     @Resource
     PostService postService;
-    @Resource
-    TagService tagService;
     @Resource
     CommentService commentService;
 
@@ -64,9 +58,7 @@ public class PostController {
 
     @RequestMapping("/savepost")
     public String savePost(@RequestParam("helperTags") String helperTags, @ModelAttribute("post") Post post) {
-        postService.savePost(post);
-        System.out.println("in save blog "+ post.getId());
-        tagService.saveTag(helperTags,post.getId());
+        postService.savePost(post, helperTags);
         return "redirect:/dashboard";
     }
 
@@ -79,8 +71,6 @@ public class PostController {
     @RequestMapping("/read")
     public String readPostById(int id, Model model) {
         Post post = postService.findPostById(id);
-        post.setComments(commentService.findAllByPostId(id));
-        post.setTags(tagService.findByPostId(id));
         model.addAttribute("post", post);
         return "readPost";
     }

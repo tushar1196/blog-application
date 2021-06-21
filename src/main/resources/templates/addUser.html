@@ -4,21 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .form {
+        border:5px solid green;
+        margin-left: 50px;
+        margin-right: 600px;
+        }
+    </style>
 </head>
 <body>
-<h3>Create Account</h3><br>>
+<div class="form" >
+<h3>Create Account</h3><br>
 <form action="/saveUser" method="post" th:action="@{/saveUser}" th:object=${user}>
 
-    <label>Name:</label>
-    <input type="text" th:field="*{name}" /><br/>
+    <label>Name:</label><br>
+    <input type="text" th:field="*{name}" required/><br/>
 
-    <label>E-mail:</label>
-    <input type="text" th:field="*{email}" /><br/>
+    <label>E-mail:</label><br>
+    <input type="email" th:field="*{email}" required/><br/>
 
-    <label>Password:</label>
-    <input type="password" th:field="*{password}" /><br/>
+    <label>Password:</label><br>
+    <input type="password" th:field="*{password}" required/><br/>
 
     <input type="submit" value="Create Account"><br><br>
 </form>
+</div>
 </body>
+
 </html>

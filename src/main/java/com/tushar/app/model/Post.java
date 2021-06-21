@@ -2,63 +2,41 @@ package com.tushar.app.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Entity(name="Posts")
+@Entity(name = "Posts")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(columnDefinition = "TEXT")
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String excerpt;
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "TEXT")
     private String content;
+    @Column(columnDefinition = "TEXT")
     private String author;
     private Timestamp publishedAt;
     private boolean isPublished;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Tag> tags;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", excerpt='" + excerpt + '\'' +
-                ", content='" + content + '\'' +
-                ", author='" + author + '\'' +
-                ", publishedAt=" + publishedAt +
-                ", isPublished=" + isPublished +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", tags=" + tags +
-                ", comments=" + comments +
-                '}';
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "post_tags",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
+    )
+    private Set<Tag> tags = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private List<Comment> comments = new ArrayList<>();
 
     public int getId() {
         return id;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
     }
 
     public void setId(int id) {
@@ -110,7 +88,7 @@ public class Post {
     }
 
     public void setPublished(boolean published) {
-        this.isPublished = published;
+        isPublished = published;
     }
 
     public Timestamp getCreatedAt() {
@@ -129,4 +107,36 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", excerpt='" + excerpt + '\'' +
+                ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                ", publishedAt=" + publishedAt +
+                ", isPublished=" + isPublished +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", tags=" + tags +
+                ", comments=" + comments +
+                '}';
+    }
 }

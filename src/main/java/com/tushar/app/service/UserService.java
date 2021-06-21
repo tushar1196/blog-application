@@ -13,21 +13,20 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-
-
     public void saveUser(User user) {
         userRepo.save(user);
     }
 
     public boolean verifyCredential(String email, String password) {
-        List<User> user = userRepo.findByUserNameAndPassword(email, password);
+        User user = userRepo.findByUserNameAndPassword(email, password);
         System.out.println(user);
-        if(user.size()>0)
+        if (user != null)
             return true;
         else
             return false;
     }
-    public String findUserNameById(int id) {
+
+    public String findById(int id) {
         User user = userRepo.findById(id);
         return user.getName();
     }

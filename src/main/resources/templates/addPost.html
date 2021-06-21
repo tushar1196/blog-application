@@ -10,6 +10,8 @@
     .inner {
         margin-left: 50px;
     }
+
+
 </style>
 <head>
     <meta charset="UTF-8">
@@ -21,31 +23,31 @@
 <h2>Create Post</h2>
 <div class="element">
 
-<form action="/savepost" method="post" th:action="@{/savepost}" th:object=${post}>
-<div class="inner">
-    <br>
-    <input type="text" th:field="*{id}" hidden/>
+    <form action="/savepost" method="post" th:action="@{/savepost}" th:object=${post}>
+        <div class="inner">
+            <br>
+            <input type="text" th:field="*{id}" hidden/>
 
-    <label>Title:</label><br>
-    <input type="text" th:field="*{title}"/><br>
+            <label>Title:</label><br>
+            <input type="text" th:field="*{title}"/><br>
 
-    <label>Excerpt:</label><br>
-    <input type="text" th:field="*{excerpt}"/><br>
+            <label>Excerpt:</label><br>
+            <input type="text" th:field="*{excerpt}"/><br>
 
-    <label>Author:</label><br>
-    <input type="text" th:field="*{author}"/><br>
+            <label>Author:</label><br>
+            <input type="text" th:field="*{author}"/><br>
 
-    <label>Content:</label><br>
-    <textarea type="text" th:field="*{content}" rows="10" cols="27"></textarea> <br>
+            <label>Content:</label><br>
+            <textarea type="text" th:field="*{content}" rows="10" cols="27"></textarea> <br>
 
-    <label>Tags:</label><br>
-    <input type="text" name="helperTags" placeholder="Enter Tags With , Separated "/><br><br>
+            <label>Tags:</label><br>
+            <input type="text" name="helperTags" placeholder="Enter Tags With , Separated "/><br><br>
 
 
-    <input type="submit" value="Submit">
-    <br><br>
-</div>
-</form>
+            <input type="submit" value="Submit">
+            <br><br>
+        </div>
+    </form>
 </div>
 </body>
 </html>

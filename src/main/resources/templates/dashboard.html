@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard</title>
     <style>
         .container {
         border:3px solid black;
@@ -32,6 +32,10 @@
         .search {
         margin-left: 100px;
         }
+
+
+
+
     </style>
 </head>
 <body>
@@ -40,18 +44,26 @@
 
 <div align="center" class="addpost"><a href="addpost">Create New Blog</a></div>
 <br>
-<div class="search">
-    <form action="/search" method="get">
-        <input type="text" name="search" placeholder="Enter to search"><input type="submit" value="Search"><br>
-    </form>
-</div>
-<br>
 <div class="sort">
     <table>
         <div>
-        <td><a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort By Published Date And Time</a></td>
+            <td>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
+                    By Published Date And Time</a></td>
         </div>
     </table>
+</div>
+<br>
+<div class="search">
+    <form action="/search" method="get">
+        <input type="text" name="search" placeholder="Enter to search" required><input type="submit" value="Search"><br>
+    </form>
+    Select to filter:
+    <select>
+        <option th:foreach="tags: ${post.tags}"
+                th:text="${tag.name}">
+        </option>
+    </select>
 </div>
 <br>
 <div th:each="post : ${posts}">
@@ -75,12 +87,14 @@
 <table class="table">
 
     <div>
-        <td><a class="page-link" th:if="${currentPage > 1}" th:href="@{'/page/'+${currentPage - 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Previous</a>
+        <td><a class="page-link" th:if="${currentPage > 1}"
+               th:href="@{'/page/'+${currentPage - 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Previous</a>
             <span th:unless="${currentPage > 1}">Previous</span>
         </td>
     </div>
     <div class="next">
-        <td><a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage + 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Next</a>
+        <td><a class="page-link" th:if="${currentPage < totalPages}"
+               th:href="@{'/page/'+${currentPage + 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Next</a>
             <span th:unless="${currentPage < totalPages}">Next</span>
         </td>
     </div>

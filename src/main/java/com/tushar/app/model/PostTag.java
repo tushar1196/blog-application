@@ -3,7 +3,7 @@ package com.tushar.app.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name="PostTags")
+@Entity
 public class PostTag {
 
     @Id
