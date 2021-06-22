@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 public class PostTag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postId;
     private int tagId;
     private Timestamp createdAt;
