@@ -2,6 +2,7 @@ package com.tushar.app.controller;
 
 import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
+import com.tushar.app.model.Tag;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PostController {
@@ -40,7 +42,7 @@ public class PostController {
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
 
-        model.addAttribute("tags",tagService.findAllTags());
+        model.addAttribute("tags", (Set<Tag>) tagService.findAllTags());
         model.addAttribute("posts", listPosts);
         return "dashboard";
     }
