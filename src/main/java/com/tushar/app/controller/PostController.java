@@ -4,20 +4,20 @@ import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
 public class PostController {
 
-    @Resource
+    @Autowired
     PostService postService;
-    @Resource
+    @Autowired
     TagService tagService;
 
     @RequestMapping("/dashboard")
