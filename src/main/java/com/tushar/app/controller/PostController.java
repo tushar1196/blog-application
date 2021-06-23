@@ -2,7 +2,6 @@ package com.tushar.app.controller;
 
 import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
-import com.tushar.app.model.Tag;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class PostController {
@@ -43,12 +40,10 @@ public class PostController {
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
 
-        List<Tag> allTags = tagService.findAllTags();
-        Set<Tag> tags = new HashSet<>(allTags);
-        model.addAttribute("tags", tags);
+        model.addAttribute("tags", tagService.findAllTags());
 
         List<String> authors = postService.findDistinctAuthorNames();
-        model.addAttribute("authors",authors);
+        model.addAttribute("authors", authors);
 
         model.addAttribute("posts", listPosts);
         return "dashboard";
