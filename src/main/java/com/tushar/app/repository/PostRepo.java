@@ -16,6 +16,10 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
     @Query(value = "select DISTINCT(p.author) from posts p", nativeQuery = true)
     List<String> finaDistinctAuthors();
 
+    @Query(value ="SELECT * FROM posts p INNER JOIN post_tags pt ON p.id = pt.post_id INNER JOIN tags t ON pt.tag_id = t.id where t.id IN ?1" , nativeQuery = true )
+    List<Post> findAllByTagId(List<Integer> id);
+
+
 
 
 }
