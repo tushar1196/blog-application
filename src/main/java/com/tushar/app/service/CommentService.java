@@ -19,9 +19,7 @@ public class CommentService {
     PostRepo postRepo;
 
     public void saveComment(Comment comment, int postId) {
-        if (comment.getCreatedAt() == null) {
-            comment.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        }
+        comment.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         Post post = postRepo.findById(postId).get();
         post.getComments().add(comment);

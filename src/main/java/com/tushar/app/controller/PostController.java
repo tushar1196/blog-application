@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,7 +43,13 @@ public class PostController {
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
 
-        model.addAttribute("tags", (Set<Tag>) tagService.findAllTags());
+        List<Tag> allTags = tagService.findAllTags();
+        Set<Tag> tags = new HashSet<>(allTags);
+        model.addAttribute("tags", tags);
+
+        List<String> authors = postService.findDistinctAuthorNames();
+        model.addAttribute("authors",authors);
+
         model.addAttribute("posts", listPosts);
         return "dashboard";
     }
@@ -93,5 +100,10 @@ public class PostController {
         List<Post> posts = postService.findBySearchKeyword(search);
         model.addAttribute("posts", posts);
         return "dashboard";
+    }
+
+    @RequestMapping("/filter")
+    public String getPostsByFilter() {
+        return null;
     }
 }

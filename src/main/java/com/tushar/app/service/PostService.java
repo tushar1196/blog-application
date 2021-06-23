@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class PostService {
@@ -26,9 +27,9 @@ public class PostService {
     public void savePost(Post post, String helperTags) {
         String[] tagsNames = helperTags.split(",");
         for (String tagName : tagsNames) {
-            if (tagRepo.findByName(tagName) == null) {
+            if (tagRepo.findByName(tagName.toLowerCase().trim()) == null) {
                 Tag tag = new Tag();
-                tag.setName(tagName);
+                tag.setName(tagName.toLowerCase().trim());
                 tag.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
                 if (tag.getCreatedAt() == null)
                     tag.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
@@ -63,6 +64,11 @@ public class PostService {
 
     public List<Post> findBySearchKeyword(String search) {
         return postsRepo.findAllBySearch(search);
+    }
+
+    public List<String> findDistinctAuthorNames() {
+        System.out.println(postsRepo.finaDistinctAuthors());
+        return postsRepo.finaDistinctAuthors();
     }
 
 }

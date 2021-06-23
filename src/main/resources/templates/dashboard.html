@@ -37,6 +37,11 @@
         margin-left: 200px;
         }
 
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -74,43 +79,36 @@
         <!--            </option>-->
         <!--        </select>-->
     </form>
-
-    <form>
+    <form method="post" action="/filter">
         <table>
-            <div th:each="post:${posts}">
-                <td>
-                    <input type="checkbox" name="${post.author}" th:value="${post.author}"><span th:text="${post.author}"></span>
-                </td>
-            </div>
+            Tags:
+            <td th:each="tag:${tags}">
+                <input type="checkbox" th:name="${tag.name}" th:value="${tag.name}"><span
+                    th:text="${tag.name}"></span>
+            </td>
         </table>
-        <input type="submit" value="submit">
+        <table>
+            Author:
+            <tr>
+                <td th:each="author:${authors}">
+                    <input type="checkbox" th:name="${author}" th:value="${author}"><span th:text="${author}"></span>
+                </td>
+            </tr>
+        </table>
+        <table>
+            Date:
+            <tr>
+                <td>
+                    <input type="date" name="dateFrom">
+                </td>
+                <td>
+                    <input type="date" name="dateTo">
+                </td>
+            </tr>
+        </table>
 
+        <input type="submit" value="Filter">
     </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <form action="/dashboard"><input type="submit" value="Reset"></form>
