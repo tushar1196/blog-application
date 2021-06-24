@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,26 +75,30 @@ public class PostService {
     }
 
     public List<Post> findPostByFilter(List<Integer> id, String dateFrom, String dateTo) {
-        Date dateF;
-        Date dateT;
-        if (!dateFrom.isBlank() && !dateTo.isBlank()) {
-            dateF = Date.valueOf(dateFrom.substring(0,10));
-            dateT = Date.valueOf(dateTo.substring(0,10));
-            System.out.println("hey-------------------------------------- datef="+dateF);
-            System.out.println("hey-------------------------------------- datet="+dateT);
+        Timestamp dateF;
+        Timestamp dateT;
+        if (!dateFrom.isEmpty() && !dateTo.isEmpty()) {
+            dateF = Timestamp.from(Instant.parse(dateFrom + ":00.000Z"));
+            dateT = Timestamp.from(Instant.parse(dateTo + ":00.000Z"));
+//
+//            System.out.println(dateF+"   jkfchvjbkhbgvfcxdcgvhjnbgvfcvgbhnjkljhgfd  "+ dateT);
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            System.out.println(postsRepo.findPostBetweenDates(sdf.dateF, dateT));
+
             List<Post> posts;
             List<Post> filterPosts = new ArrayList<>();
             if (!id.isEmpty()) {
                 posts = postsRepo.findAllByTagId(id);
                 for (Post post : posts) {
-                    if (dateF.after(post.getPublishedAt()) && dateT.before(post.getPublishedAt())) {
+                    if (post.getPublishedAt().compareTo(dateF)>=0 && post.getPublishedAt().compareTo(dateT)<=0) {
                         filterPosts.add(post);
                     }
                 }
+                return filterPosts;
             } else {
                 posts = postsRepo.findAll();
                 for (Post post : posts) {
-                    if (dateF.after(post.getPublishedAt()) && dateT.before(post.getPublishedAt())) {
+                    if (post.getPublishedAt().compareTo(dateF)>=0 && post.getPublishedAt().compareTo(dateT)<=0) {
                         filterPosts.add(post);
                     }
                 }

@@ -28,19 +28,19 @@
             <input type="text" th:field="*{id}" hidden/>
 
             <label>Title:</label><br>
-            <input type="text" th:field="*{title}"/><br>
+            <input type="text" th:field="*{title}" required/><br>
 
             <label>Excerpt:</label><br>
-            <input type="text" th:field="*{excerpt}"/><br>
+            <input type="text" th:field="*{excerpt}" required/><br>
 
             <label>Author:</label><br>
-            <input type="text" th:field="*{author}"/><br>
+            <input type="text" th:field="*{author}" required/><br>
 
             <label>Content:</label><br>
-            <textarea type="text" th:field="*{content}" rows="10" cols="27"></textarea> <br>
+            <textarea type="text" th:field="*{content}" rows="10" cols="27" required></textarea> <br>
 
             <label>Tags:</label><br>
-            <input type="text" name="helperTags" placeholder="Enter Tags With , Separated "/><br><br>
+            <input type="text" name="helperTags" placeholder="Enter Tags With , Separated " required/><br><br>
 
 
             <input type="submit" value="Submit">
