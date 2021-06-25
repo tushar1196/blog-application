@@ -13,13 +13,10 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "TEXT")
     private String title;
-    @Column(columnDefinition = "TEXT")
     private String excerpt;
     @Column(columnDefinition = "TEXT")
     private String content;
-    @Column(columnDefinition = "TEXT")
     private String author;
     private Timestamp publishedAt;
     private boolean isPublished;

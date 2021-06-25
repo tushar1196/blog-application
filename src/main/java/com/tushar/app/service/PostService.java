@@ -2,8 +2,8 @@ package com.tushar.app.service;
 
 import com.tushar.app.model.Post;
 import com.tushar.app.model.Tag;
-import com.tushar.app.repository.PostRepo;
-import com.tushar.app.repository.TagRepo;
+import com.tushar.app.repository.PostRepository;
+import com.tushar.app.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,14 +21,14 @@ import java.util.List;
 public class PostService {
 
     @Autowired
-    PostRepo postsRepo;
+    PostRepository postsRepo;
     @Autowired
-    TagRepo tagRepo;
+    TagRepository tagRepository;
 
     public void savePost(Post post, String helperTags) {
         String[] tagsNames = helperTags.split(",");
         for (String tagName : tagsNames) {
-            if (tagRepo.findByName(tagName.toLowerCase().trim()) == null) {
+            if (tagRepository.findByName(tagName.toLowerCase().trim()) == null) {
                 Tag tag = new Tag();
                 tag.setName(tagName.toLowerCase().trim());
                 tag.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
@@ -80,17 +78,12 @@ public class PostService {
         if (!dateFrom.isEmpty() && !dateTo.isEmpty()) {
             dateF = Timestamp.from(Instant.parse(dateFrom + ":00.000Z"));
             dateT = Timestamp.from(Instant.parse(dateTo + ":00.000Z"));
-//
-//            System.out.println(dateF+"   jkfchvjbkhbgvfcxdcgvhjnbgvfcvgbhnjkljhgfd  "+ dateT);
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            System.out.println(postsRepo.findPostBetweenDates(sdf.dateF, dateT));
-
             List<Post> posts;
             List<Post> filterPosts = new ArrayList<>();
             if (!id.isEmpty()) {
                 posts = postsRepo.findAllByTagId(id);
                 for (Post post : posts) {
-                    if (post.getPublishedAt().compareTo(dateF)>=0 && post.getPublishedAt().compareTo(dateT)<=0) {
+                    if (post.getPublishedAt().compareTo(dateF) >= 0 && post.getPublishedAt().compareTo(dateT) <= 0) {
                         filterPosts.add(post);
                     }
                 }
@@ -98,7 +91,7 @@ public class PostService {
             } else {
                 posts = postsRepo.findAll();
                 for (Post post : posts) {
-                    if (post.getPublishedAt().compareTo(dateF)>=0 && post.getPublishedAt().compareTo(dateT)<=0) {
+                    if (post.getPublishedAt().compareTo(dateF) >= 0 && post.getPublishedAt().compareTo(dateT) <= 0) {
                         filterPosts.add(post);
                     }
                 }

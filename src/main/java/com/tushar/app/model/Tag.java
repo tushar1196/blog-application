@@ -11,7 +11,6 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "TEXT")
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;

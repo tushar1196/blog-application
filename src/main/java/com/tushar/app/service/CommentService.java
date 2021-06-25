@@ -2,8 +2,8 @@ package com.tushar.app.service;
 
 import com.tushar.app.model.Comment;
 import com.tushar.app.model.Post;
-import com.tushar.app.repository.CommentRepo;
-import com.tushar.app.repository.PostRepo;
+import com.tushar.app.repository.CommentRepository;
+import com.tushar.app.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,28 +14,28 @@ import java.time.LocalDateTime;
 public class CommentService {
 
     @Autowired
-    CommentRepo commentRepo;
+    CommentRepository commentRepository;
     @Autowired
-    PostRepo postRepo;
+    PostRepository postRepository;
 
     public void saveComment(Comment comment, int postId) {
         comment.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        Post post = postRepo.findById(postId).get();
+        Post post = postRepository.findById(postId).get();
         post.getComments().add(comment);
-        postRepo.save(post);
+        postRepository.save(post);
     }
 
     public void saveUpdateComment(Comment comment) {
         comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        commentRepo.save(comment);
+        commentRepository.save(comment);
     }
 
     public void deleteById(int id) {
-        commentRepo.deleteById(id);
+        commentRepository.deleteById(id);
     }
 
     public Comment findById(int id) {
-        return commentRepo.findById(id).get();
+        return commentRepository.findById(id).get();
     }
 }

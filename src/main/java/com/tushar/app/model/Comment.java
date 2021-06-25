@@ -9,12 +9,9 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "TEXT")
     private String name;
-    @Column(columnDefinition = "TEXT")
     private String email;
-    @Column(columnDefinition = "TEXT")
-    private String oneComment;
+    private String description;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -42,12 +39,12 @@ public class Comment {
         this.email = email;
     }
 
-    public String getOneComment() {
-        return oneComment;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOneComment(String oneComment) {
-        this.oneComment = oneComment;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Timestamp getCreatedAt() {
@@ -72,7 +69,7 @@ public class Comment {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", comment='" + oneComment + '\'' +
+                ", comment='" + description + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

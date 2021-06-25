@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PostRepo extends JpaRepository<Post, Integer> {
+public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query(value ="SELECT * FROM posts p INNER JOIN post_tags pt ON p.id = pt.post_id INNER JOIN tags t ON pt.tag_id = t.id where p.title like %?1% or p.author like %?1% or p.content like %?1% or t.name like %?1%",nativeQuery = true )
     List<Post> findAllBySearch(String search);

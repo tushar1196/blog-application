@@ -1,7 +1,6 @@
 package com.tushar.app.model;
 
 import java.util.List;
-import java.util.Set;
 
 public class Filter {
 
