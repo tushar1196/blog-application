@@ -97,10 +97,10 @@
                     <snap th:text="${comment.createdAt}"></snap>
                 </td>
                 <td>
-                    <a th:href="@{'/read/updateComment/'+${comment.id}+'/'+${post.id}}">Update</a>
+                    <a th:href="@{'/read/updatecomment/'+${comment.id}+'/'+${post.id}}">Update</a>
                 </td>
                 <td>
-                    <a th:href="@{'/read/deleteComment/'+${comment.id}+'/'+${post.id}}">Delete</a>
+                    <a th:href="@{'/read/deletecomment/'+${comment.id}+'/'+${post.id}}">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -108,7 +108,7 @@
     </table>
     <h1>Give Comments</h1>
     <div class="element">
-        <form action="" method="post" th:action="@{'/saveComment/'+${postId}}" th:object="${comment}">
+        <form action="" method="post" th:action="@{'/savecomment/'+${postId}}" th:object="${comment}">
             <div class="inner">
                 <br>
                 <input type="text" th:field="*{id}" hidden>

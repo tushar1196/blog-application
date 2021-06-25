@@ -16,7 +16,7 @@
 <body>
 <div class="form">
     <h3>Create Account</h3><br>
-    <form action="/saveUser" method="post" th:action="@{/saveUser}" th:object=${user}>
+    <form action="/saveuser" method="post" th:action="@{/saveuser}" th:object=${user}>
 
         <label>Name:</label><br>
         <input type="text" th:field="*{name}" required/><br/>

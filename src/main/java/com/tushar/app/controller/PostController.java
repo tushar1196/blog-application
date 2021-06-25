@@ -54,19 +54,19 @@ public class PostController {
         return "dashboard";
     }
 
-    @RequestMapping("/addPost")
+    @RequestMapping("/addpost")
     public String viewForm(Model model) {
         return viewBlogForm(model);
     }
 
-    @RequestMapping("/page/addPost")
+    @RequestMapping("/page/addpost")
     public String viewBlogForm(Model model) {
         Post post = new Post();
         model.addAttribute("post", post);
         return "addPost";
     }
 
-    @RequestMapping("/savePost")
+    @RequestMapping("/savepost")
     public String savePost(@RequestParam("helperTags") String helperTags, @ModelAttribute("post") Post post) {
         postService.savePost(post, helperTags);
         return "redirect:/dashboard";

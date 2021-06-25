@@ -15,21 +15,21 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @RequestMapping("/saveComment/{postId}")
+    @RequestMapping("/savecomment/{postId}")
     public String saveComment(@ModelAttribute("comment") Comment comment, @PathVariable int postId) {
         System.out.println("CommentController saveComment" + comment);
         commentService.saveComment(comment, postId);
         return "redirect:/read/?id=" + postId;
     }
 
-    @RequestMapping("/saveComment/Update/{postId}")
+    @RequestMapping("/savecomment/update/{postId}")
     public String saveUpdateComment(@ModelAttribute("comment") Comment comment, @PathVariable int postId) {
         System.out.println("CommentController saveComment" + comment);
         commentService.saveUpdateComment(comment);
         return "redirect:/read/?id=" + postId;
     }
 
-    @RequestMapping("/read/updateComment/{commentId}/{postId}")
+    @RequestMapping("/read/updatecomment/{commentId}/{postId}")
     public String updateComment(@PathVariable("commentId") int commentId, @PathVariable("postId") int postId, Model model) {
         Comment comment = commentService.findById(commentId);
         model.addAttribute("comment", comment);
@@ -37,7 +37,7 @@ public class CommentController {
         return "updateComment";
     }
 
-    @RequestMapping("/read/deleteComment/{commentId}/{postId}")
+    @RequestMapping("/read/deletecomment/{commentId}/{postId}")
     public String delete(@PathVariable("commentId") int commentId , @PathVariable("postId") int postId ) {
         System.out.println("in comment controller before delete");
         commentService.deleteById(commentId);

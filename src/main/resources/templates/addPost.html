@@ -22,7 +22,7 @@
 <h2>Create Post</h2>
 <div class="element">
 
-    <form action="/savePost" method="post" th:action="@{/savePost}" th:object=${post}>
+    <form action="/savePost" method="post" th:action="@{/savepost}" th:object=${post}>
         <div class="inner">
             <br>
             <input type="text" th:field="*{id}" hidden/>

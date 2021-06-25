@@ -25,7 +25,7 @@ public class UserController {
         return "addUser";
     }
 
-    @PostMapping("/saveUser")
+    @PostMapping("/saveuser")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
         System.out.println(user);
         userService.saveUser(user);
@@ -34,7 +34,7 @@ public class UserController {
         return "userLogin";
     }
 
-    @RequestMapping("/checkCredentials")
+    @RequestMapping("/checkcredentials")
     public String verifyCredentials(@RequestParam String email, @RequestParam String password, Model model) {
         boolean isValidUser = userService.verifyCredential(email, password);
         if (isValidUser) {
