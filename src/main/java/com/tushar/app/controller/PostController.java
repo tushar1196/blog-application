@@ -104,8 +104,6 @@ public class PostController {
 
     @RequestMapping("/filter")
     public String getPostsByFilter(@ModelAttribute("filter") Filter filter, @RequestParam("dateFrom") String dateFrom, @RequestParam("dateTo") String dateTo, Model model) {
-        System.out.println("in filter");
-        System.out.println("dateFrom= " + dateFrom + "dateTo= " + dateTo);
         List<Integer> id = new ArrayList<>();
         for (Tag tag : filter.getTags()) {
             System.out.println(tag.getName());

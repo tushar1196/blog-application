@@ -45,7 +45,6 @@ public class PostService {
         post.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         post.setPublished(true);
         postsRepo.save(post);
-        System.out.println("in post service savepost");
     }
 
     public void deletePostById(int id) {

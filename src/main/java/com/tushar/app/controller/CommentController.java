@@ -17,14 +17,12 @@ public class CommentController {
 
     @RequestMapping("/savecomment/{postId}")
     public String saveComment(@ModelAttribute("comment") Comment comment, @PathVariable int postId) {
-        System.out.println("CommentController saveComment" + comment);
         commentService.saveComment(comment, postId);
         return "redirect:/read/?id=" + postId;
     }
 
     @RequestMapping("/savecomment/update/{postId}")
     public String saveUpdateComment(@ModelAttribute("comment") Comment comment, @PathVariable int postId) {
-        System.out.println("CommentController saveComment" + comment);
         commentService.saveUpdateComment(comment);
         return "redirect:/read/?id=" + postId;
     }
@@ -39,9 +37,7 @@ public class CommentController {
 
     @RequestMapping("/read/deletecomment/{commentId}/{postId}")
     public String delete(@PathVariable("commentId") int commentId , @PathVariable("postId") int postId ) {
-        System.out.println("in comment controller before delete");
         commentService.deleteById(commentId);
-        System.out.println("in comment controller after delete");
         return "redirect:/read/?id=" + postId;
     }
 }
