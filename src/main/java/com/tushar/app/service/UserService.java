@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService /*implements UserDetailsService*/ {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -16,21 +16,17 @@ public class UserService /*implements UserDetailsService*/ {
     }
 
     public boolean verifyCredential(String email, String password) {
-        User user = userRepository.findByUserNameAndPassword(email, password);
+        User user = userRepository.findByEmail(email);
         System.out.println(user);
         return user != null;
     }
+
+//    public List<User> findAllUsers(String s) {
+//        return userRepository.findAll();
+//    }
 
     public String findById(int id) {
         User user = userRepository.findById(id);
         return user.getName();
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = userRepo.findByName(username);
-//        if (user==null)
-//            throw new UsernameNotFoundException("UsernameNotFoundException");
-//        return new UserPrinciple(user);
-//    }
 }

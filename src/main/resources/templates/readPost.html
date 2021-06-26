@@ -87,7 +87,7 @@
                     <snap th:text="${comment.email}"></snap>
                 </td>
                 <td>
-                    <snap th:text="${comment.oneComment}"></snap>
+                    <snap th:text="${comment.description}"></snap>
                 </td>
                 <td>
                     <snap th:text="${comment.createdAt}"></snap>
@@ -116,7 +116,7 @@
                 <input type="text" th:field="*{email}" required/><br/>
 
                 <label>Comment:</label><br>
-                <input type="text" th:field="*{oneComment}" required/><br/>
+                <input type="text" th:field="*{description}" required/><br/>
                 <br>
                 <input type="submit" value="Save Comment"><br><br>
             </div>
