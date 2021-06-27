@@ -50,7 +50,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/dashboard**", "/page/**", "/read**", "/search**"
+                .antMatchers("/dashboard**","/","/page/**", "/read**", "/search**"
                         , "/filter**", "/register**", "/saveuser**", "/savecomment/**").permitAll()
                 .antMatchers("read/delete/**", "read/updatecomment/**", "/addpost", "/page/addpost"
                         , "/delete", "/update").hasAnyRole("AUTHOR", "ADMIN")
@@ -60,7 +60,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .successForwardUrl("/dashboard")
+                .successForwardUrl("/")
                 .permitAll()
                 .and()
                 .logout()

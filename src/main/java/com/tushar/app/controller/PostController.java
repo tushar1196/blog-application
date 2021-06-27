@@ -26,7 +26,7 @@ public class PostController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/dashboard")
+    @RequestMapping("/")
     public String getBlogs(Model model) {
         return viewPostPaginated(1, model, "title", "asc");
     }
@@ -87,13 +87,13 @@ public class PostController {
     @RequestMapping("/savepost")
     public String savePost(@RequestParam("helperTags") String helperTags, @ModelAttribute("post") Post post) {
         postService.savePost(post, helperTags);
-        return "redirect:/dashboard";
+        return "redirect:/";
     }
 
     @RequestMapping("/delete")
     public String deletePost(int id) {
         postService.deletePostById(id);
-        return "redirect:/dashboard";
+        return "redirect:/";
     }
 
     @RequestMapping("/read")
