@@ -47,7 +47,7 @@
             <input type="text" th:field="*{excerpt}" required/><br>
 
             <div th:if="${role=='ROLE_AUTHOR'}">
-                <input type="text" th:field="*{author}" hidden/><br>
+                <input type="text" th:field="*{author}" required/><br>
             </div>
 
             <div th:if="${role=='ROLE_ADMIN'}">

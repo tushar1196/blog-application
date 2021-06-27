@@ -126,6 +126,10 @@ public class PostController {
     @RequestMapping("/update")
     public String updatePost(@RequestParam("id") int id, Model model) {
         Post post = postService.findPostById(id);
+        User user = userService.getLoggedUser();
+        System.out.println(user+"  in post controller ?????????????????????????????????????????????");
+        post.setAuthor(user.getName());
+        model.addAttribute("role", user.getRole());
         model.addAttribute("post", post);
         return "addPost";
     }
