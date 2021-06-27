@@ -35,40 +35,46 @@
         }
         .clear {
         margin-left: 200px;
-
-
-
     </style>
 </head>
 <body>
-
-<h1 align="center">Blog List</h1>
 <table>
     <td>
-        <div align="center" class="addPost"><a href="addpost">Create New Blog</a></div>
+        <a href="addpost">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Add Post</button>
+        </a></div>
     </td>
     <td>
-        <div align="center" class="login"><a href="/login">Login</a></div>
+        <a href="/login">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Login</button>
+        </a></div>
     </td>
     <td>
-        <div align="center" class="login"><a href="/register">Sign Up</a></div>
+        <a href="/register">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Sign UP</button>
+        </a></div>
     </td>
     <td>
-        <div align="center" class="login"><a href="/logout">Logout</a></div>
+        <a href="/logout">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Logout</button>
+        </a></div>
     </td>
 </table>
+<h1 align="center" style="background-color:dimgray;color:white;height:50px">Posts</h1>
 <br>
-<div class="sort">
+<div align="right">
     <table>
         <td>
-            <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
-                By Published Date And Time</a></td>
+            <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">
+                <button style="background-color:mediumpurple;color:white;width:150px;height:40px;">Sort By Time</button>
+            </a></td>
     </table>
 </div>
 <br>
 <div class="search">
     <form action="/search" method="get">
-        <input type="text" name="search" placeholder="Enter to search"><input type="submit" value="Search">
+        <input type="text" name="search" placeholder="Enter to search"><input style="background-color:green;height:30px"
+                                                                              type="submit" value="Search">
         <br>
     </form>
     <form method="post" th:action="@{/filter}" th:object="${filter}">
@@ -87,9 +93,9 @@
                 <input type="datetime-local" name="dateTo">
             </td>
         </table>
-        <input type="submit" value="Apply">
+        <input style="background-color:green;width:100px;height:30px" type="submit" value="Filter">
     </form>
-    <form action="/dashboard"><input type="submit" value="Reset"></form>
+    <form action="/dashboard"><input style="background-color:blue;width:100px;height:30px" type="submit" value="Reset"></form>
 </div>
 <br><br>
 <div th:each="post : ${posts}">
@@ -97,7 +103,7 @@
         <span th:text="${post.id}" hidden></span><br>
         <div class="inner">
             Title: <span th:text="${post.title}"></span><br>
-            Except: <span th:text="${post.excerpt}"></span><br>
+            Excerpt: <span th:text="${post.excerpt}"></span><br>
             Author: <span th:text="${post.author}"></span><br>
             Published: <span th:text="${post.publishedAt}"></span><br>
             <table>

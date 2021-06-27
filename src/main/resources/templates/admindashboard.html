@@ -3,18 +3,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
-  <style>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
         .container {
         border:3px solid black;
         margin-right: 100px;
         margin-left: 100px;
-        }
-        .addPost {
-        border:5px solid black;
-        margin-left: 850px;
-        margin-right: 100px;
         }
         .table {
         margin-left: 110px;
@@ -39,87 +34,99 @@
 </head>
 <body>
 <h1>admin dash board</h1>
-<h1 align="center">Blog List</h1>
+<!--<td><a href="/dashboard">-->
+<!--  <button style="background-color:black;color:white;width:100px;height:30px;">Home</button>-->
+<!--</a></td>-->
 <table>
-  <td>
-    <div align="center" class="addPost"><a href="addpost">Create New Blog</a></div>
-  </td>
-  <td>
-    <div align="center" class="login"><a href="/login">Login</a></div>
-  </td>
-  <td>
-    <div align="center" class="login"><a href="/register">Sign Up</a></div>
-  </td>
-  <td>
-    <div align="center" class="login"><a href="/logout">Logout</a></div>
-  </td>
+    <td>
+        <a href="addpost">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Add Post</button>
+        </a></div>
+    </td>
+    <td>
+        <a href="/login">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Login</button>
+        </a></div>
+    </td>
+    <td>
+        <a href="/register">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Sign UP</button>
+        </a></div>
+    </td>
+    <td>
+        <a href="/logout">
+            <button style="background-color:maroon;color:white;width:150px;height:40px;">Logout</button>
+        </a></div>
+    </td>
 </table>
+<h1 align="center">Blog List</h1>
 <br>
 <div class="sort">
-  <table>
-    <td>
-      <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
-        By Published Date And Time</a></td>
-  </table>
+    <table>
+        <td>
+            <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
+                By Published Date And Time</a></td>
+    </table>
 </div>
 <br>
 <div class="search">
-  <form action="/search" method="get">
-    <input type="text" name="search" placeholder="Enter to search"><input type="submit" value="Search">
-    <br>
-  </form>
-  <form method="post" th:action="@{/filter}" th:object="${filter}">
-    Filter By Tags:
-    <ul>
-      <li th:each="tag:${tags}">
-        <input type="checkbox" th:field="*{tags}" th:value="${tag.id}">
-        <label th:text="${tag.name}"></label>
-      </li>
-    </ul>
-    <table>
-      <td>
-        <input type="datetime-local" name="dateFrom">
-      </td>
-      <td>
-        <input type="datetime-local" name="dateTo">
-      </td>
-    </table>
-    <input type="submit" value="Apply">
-  </form>
-  <form action="/dashboard"><input type="submit" value="Reset"></form>
+    <form action="/search" method="get">
+        <input type="text" name="search" placeholder="Enter to search"><input style="background-color:green;height:30px"
+                                                                              type="submit" value="Search">
+        <br>
+    </form>
+    <form method="post" th:action="@{/filter}" th:object="${filter}">
+        Filter By Tags:
+        <ul>
+            <li th:each="tag:${tags}">
+                <input type="checkbox" th:field="*{tags}" th:value="${tag.id}">
+                <label th:text="${tag.name}"></label>
+            </li>
+        </ul>
+        <table>
+            <td>
+                <input type="datetime-local" name="dateFrom">
+            </td>
+            <td>
+                <input type="datetime-local" name="dateTo">
+            </td>
+        </table>
+        <input style="background-color:green;width:100px;height:30px" type="submit" value="Filter">
+    </form>
+    <form action="/dashboard"><input style="background-color:blue;width:100px;height:30px" type="submit" value="Reset"></form>
 </div>
 <br><br>
 <div th:each="post : ${posts}">
-  <div class="container">
-    <span th:text="${post.id}" hidden></span><br>
-    <div class="inner">
-      Title: <span th:text="${post.title}"></span><br>
-      Except: <span th:text="${post.excerpt}"></span><br>
-      Author: <span th:text="${post.author}"></span><br>
-      Published: <span th:text="${post.publishedAt}"></span><br>
-      <table>
-        <td><a th:href="@{/update(id=${post.id})}">Update</a></td>
-        <td><a th:href="@{/delete(id=${post.id})}">Delete</a></td>
-        <td><a th:href="@{/read(id=${post.id})}">Read</a></td>
-        <br>
-      </table>
+    <div class="container">
+        <span th:text="${post.id}" hidden></span><br>
+        <div class="inner">
+            Title: <span th:text="${post.title}"></span><br>
+            Excerpt: <span th:text="${post.excerpt}"></span><br>
+            Author: <span th:text="${post.author}"></span><br>
+            Published: <span th:text="${post.publishedAt}"></span><br>
+            <table>
+                <td><a th:href="@{/update(id=${post.id})}">Update</a></td>
+                <td><a th:href="@{/delete(id=${post.id})}">Delete</a></td>
+                <td><a th:href="@{/read(id=${post.id})}">Read</a></td>
+                <br>
+            </table>
+        </div>
     </div>
-  </div>
-  <br>
+    <br>
 </div>
 <table class="table">
-  <div>
-    <td><a class="page-link" th:if="${currentPage > 1}"
-           th:href="@{'/page/'+${currentPage - 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Previous</a>
-      <span th:unless="${currentPage > 1}">Previous</span>
-    </td>
-  </div>
-  <div class="next">
-    <td><a class="page-link" th:if="${currentPage < totalPages}"
-           th:href="@{'/page/'+${currentPage + 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Next</a>
-      <span th:unless="${currentPage < totalPages}">Next</span>
-    </td>
-  </div>
+    <div>
+        <td><a class="page-link" th:if="${currentPage > 1}"
+               th:href="@{'/page/'+${currentPage - 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Previous</a>
+            <span th:unless="${currentPage > 1}">Previous</span>
+        </td>
+    </div>
+    <div class="next">
+        <td><a class="page-link" th:if="${currentPage < totalPages}"
+               th:href="@{'/page/'+${currentPage + 1}+ '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection}}">Next</a>
+            <span th:unless="${currentPage < totalPages}">Next</span>
+        </td>
+    </div>
 </table>
 </body>
 </html>

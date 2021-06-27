@@ -29,8 +29,15 @@
     </style>
 </head>
 <body>
+<table>
+    <td><a href="/dashboard">
+        <button style="background-color:black;color:white;width:100px;height:30px;">Home</button>
+    </a></td>
+    <td><a href="/logout">
+        <button style="background-color:black;color:white;width:100px;height:30px;">Logout</button>
+    </a></td>
+</table>
 <h1>Read post</h1>
-<div class="dashboard" align="center"><br><a href="/dashboard">Home</a><br><br></div>
 <br><br>
 <div class="outer" align="center">
     <div align="center"><h1><span th:text="${post.title}"></span></h1><br></div>

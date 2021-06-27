@@ -11,10 +11,12 @@
         margin-left: 50px;
     }
     .logout {
-        display: block;
-        width: 100%;
         margin-right: 600px;
     }
+    .submit {
+
+    }
+
 
 </style>
 <head>
@@ -23,9 +25,16 @@
 
 </head>
 <body>
-<div class="logout" align="right"><a href="/logout">
-    <button>Logout</button>
-</a></div>
+<!--<input type="button" style="background-color:black;color:white;width:150px; height:40px;" value="Click Me!!">-->
+<!--<div class="logout" align="right">-->
+<table>
+    <td><a href="/dashboard">
+        <button style="background-color:black;color:white;width:100px;height:30px;">Home</button>
+    </a></td>
+    <td><a href="/logout">
+        <button style="background-color:black;color:white;width:100px;height:30px;">Logout</button>
+    </a></td>
+</table>
 <h2>Create Post</h2>
 <div class="element">
     <form action="/savePost" method="post" th:action="@{/savepost}" th:object=${post}>
@@ -55,10 +64,11 @@
             <input type="text" name="helperTags" placeholder="Enter Tags With , Separated " required/><br><br>
 
 
-            <input type="submit" value="Submit">
+            <input style="color:green; height:30px; width:100px" type="submit" value="Submit">
             <br><br>
         </div>
     </form>
 </div>
 </body>
 </html>
+
