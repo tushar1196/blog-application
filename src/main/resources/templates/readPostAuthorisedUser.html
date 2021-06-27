@@ -26,10 +26,11 @@
     .inner {
         margin-left: 50px;
     }
+
     </style>
 </head>
 <body>
-<h1>Read post</h1>
+<h1>READ POST AUTHOR</h1>
 <div class="dashboard" align="center"><br><a href="/dashboard">Home</a><br><br></div>
 <br><br>
 <div class="outer" align="center">
@@ -74,8 +75,8 @@
             <td>User Email</td>
             <td>Comment</td>
             <td>Post On</td>
-<!--            <td>Update</td>-->
-<!--            <td>Delete</td>-->
+            <td>Update</td>
+            <td>Delete</td>
         </tr>
         </thead>
         <div id="commentsInner" th:each="comment: ${post.comments}">
@@ -93,12 +94,14 @@
                 <td>
                     <snap th:text="${comment.createdAt}"></snap>
                 </td>
-<!--                <td>-->
-<!--                    <a th:if="${userName==comment.name}" th:href="@{'/read/updatecomment/'+${comment.id}+'/'+${post.id}}">Update</a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a th:if="${userName==comment.name}" th:href="@{'/read/deletecomment/'+${comment.id}+'/'+${post.id}}">Delete</a>-->
-<!--                </td>-->
+                <td>
+                    <a th:if="${userName==comment.name}"
+                       th:href="@{'/read/updatecomment/'+${comment.id}+'/'+${post.id}}">Update</a>
+                </td>
+                <td>
+                    <a th:if="${userName==comment.name}"
+                       th:href="@{'/read/deletecomment/'+${comment.id}+'/'+${post.id}}">Delete</a>
+                </td>
             </tr>
             </tbody>
         </div>
@@ -110,12 +113,13 @@
                 <br>
                 <input type="text" th:field="*{id}" hidden>
 
-                <label>User Name:</label><br>
-                <input type="text" th:field="*{name}" required/><br/>
+                <div th:if="${userName==comment.name}">
+                    <!--                <label>User Name:</label><br>-->
+                    <input type="text" th:field="*{name}" hidden/><br/>
 
-                <label>User E-mail:</label><br>
-                <input type="text" th:field="*{email}" required/><br/>
-
+                    <!--                <label>User E-mail:</label><br>-->
+                    <input type="text" th:field="*{email}" hidden/><br/>
+                </div>
                 <label>Comment:</label><br>
                 <input type="text" th:field="*{description}" required/><br/>
                 <br>

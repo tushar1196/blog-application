@@ -10,6 +10,11 @@
     .inner {
         margin-left: 50px;
     }
+    .logout {
+        display: block;
+        width: 100%;
+        margin-right: 600px;
+    }
 
 </style>
 <head>
@@ -18,10 +23,11 @@
 
 </head>
 <body>
-
+<div class="logout" align="right"><a href="/logout">
+    <button>Logout</button>
+</a></div>
 <h2>Create Post</h2>
 <div class="element">
-
     <form action="/savePost" method="post" th:action="@{/savepost}" th:object=${post}>
         <div class="inner">
             <br>
@@ -33,8 +39,14 @@
             <label>Excerpt:</label><br>
             <input type="text" th:field="*{excerpt}" required/><br>
 
-            <label>Author:</label><br>
-            <input type="text" th:field="*{author}" required/><br>
+            <div th:if="${role=='ROLE_AUTHOR'}">
+                <input type="text" th:field="*{author}" hidden/><br>
+            </div>
+
+            <div th:if="${role=='ROLE_ADMIN'}">
+                <label>Author:</label><br>
+                <input type="text" th:field="*{author}" required/><br>
+            </div>
 
             <label>Content:</label><br>
             <textarea type="text" th:field="*{content}" rows="10" cols="27" required></textarea> <br>

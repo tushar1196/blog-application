@@ -1,11 +1,9 @@
 package com.tushar.app.controller;
 
-import com.tushar.app.model.Comment;
-import com.tushar.app.model.Filter;
-import com.tushar.app.model.Post;
-import com.tushar.app.model.Tag;
+import com.tushar.app.model.*;
 import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
+import com.tushar.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -25,6 +23,8 @@ public class PostController {
     PostService postService;
     @Autowired
     TagService tagService;
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/dashboard")
     public String getBlogs(Model model) {
@@ -53,8 +53,20 @@ public class PostController {
         List<String> authors = postService.findDistinctAuthorNames();
         model.addAttribute("authors", authors);
 
+        User user = userService.getLoggedUser();
+        if (user != null) {
+            model.addAttribute("helperName", user.getName());
+        } else {
+            model.addAttribute("helperName", "null");
+        }
         model.addAttribute("posts", listPosts);
-        return "dashboard";
+//        System.out.println(user.getRole()+" ____________ " );
+        if (user != null && user.getRole().equals("ROLE_ADMIN")) {
+            System.out.println(user+"+++++++++++++++++++++++++++++++++++++++++");
+            return "admindashboard";
+        } else {
+            return "dashboard";
+        }
     }
 
     @RequestMapping("/addpost")
@@ -65,12 +77,9 @@ public class PostController {
     @RequestMapping("/page/addpost")
     public String viewBlogForm(Model model) {
         Post post = new Post();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = "";
-        if( principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
-        }
-        post.setAuthor(username);
+        User user = userService.getLoggedUser();
+        post.setAuthor(user.getName());
+        model.addAttribute("role", user.getRole());
         model.addAttribute("post", post);
         return "addPost";
     }
@@ -90,11 +99,26 @@ public class PostController {
     @RequestMapping("/read")
     public String readPostById(int id, Model model) {
         Post post = postService.findPostById(id);
+        User user = userService.getLoggedUser();
         Comment comment = new Comment();
         model.addAttribute("comment", comment);
+        if(user!=null) {
+            model.addAttribute("userName",user.getName());
+            comment.setName(user.getName());
+            comment.setEmail(user.getEmail());
+        } else {
+            model.addAttribute("userName","null");
+        }
         model.addAttribute("postId", id);
         model.addAttribute("post", post);
-        return "readPost";
+        System.out.println("role_________________++++++++++++++ "+user.getRole());
+        if (user!=null && user.getRole().equals("ROLE_AUTHOR")) {
+            return "readPostAuthorisedUser";
+        } else if (user!=null && user.getRole().equals("ROLE_ADMIN")) {
+            return "readPostAdmin";
+        } else {
+            return "readPost";
+        }
     }
 
     @RequestMapping("/update")

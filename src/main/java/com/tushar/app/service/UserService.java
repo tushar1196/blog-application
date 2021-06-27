@@ -3,6 +3,8 @@ package com.tushar.app.service;
 import com.tushar.app.model.User;
 import com.tushar.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +29,19 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public String findById(int id) {
-        User user = userRepository.findById(id);
-        return user.getName();
+    public User findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user;
+    }
+
+    public User getLoggedUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if( principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        }
+        User user = this.findByEmail(username);
+//        System.out.println(user+" ++++++++++++++++++++ "+username);
+        return user;
     }
 }

@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-<h1>Read post</h1>
+<h1>Aamin read post</h1>
 <div class="dashboard" align="center"><br><a href="/dashboard">Home</a><br><br></div>
 <br><br>
 <div class="outer" align="center">
@@ -74,8 +74,8 @@
             <td>User Email</td>
             <td>Comment</td>
             <td>Post On</td>
-<!--            <td>Update</td>-->
-<!--            <td>Delete</td>-->
+            <td>Update</td>
+            <td>Delete</td>
         </tr>
         </thead>
         <div id="commentsInner" th:each="comment: ${post.comments}">
@@ -93,12 +93,12 @@
                 <td>
                     <snap th:text="${comment.createdAt}"></snap>
                 </td>
-<!--                <td>-->
-<!--                    <a th:if="${userName==comment.name}" th:href="@{'/read/updatecomment/'+${comment.id}+'/'+${post.id}}">Update</a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a th:if="${userName==comment.name}" th:href="@{'/read/deletecomment/'+${comment.id}+'/'+${post.id}}">Delete</a>-->
-<!--                </td>-->
+                <td>
+                    <a th:href="@{'/read/updatecomment/'+${comment.id}+'/'+${post.id}}">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{'/read/deletecomment/'+${comment.id}+'/'+${post.id}}">Delete</a>
+                </td>
             </tr>
             </tbody>
         </div>
