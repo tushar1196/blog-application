@@ -30,10 +30,11 @@
         }
         .clear {
         margin-left: 200px;
+
     </style>
 </head>
 <body>
-<h1>admin dash board</h1>
+<!--<h1>admin dash board</h1>-->
 <!--<td><a href="/dashboard">-->
 <!--  <button style="background-color:black;color:white;width:100px;height:30px;">Home</button>-->
 <!--</a></td>-->
@@ -61,11 +62,12 @@
 </table>
 <h1 align="center">Blog List</h1>
 <br>
-<div class="sort">
+<div align="right">
     <table>
         <td>
-            <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">Sort
-                By Published Date And Time</a></td>
+            <a th:href="@{'/page/' + ${currentPage} + '?sortField=publishedAt&sortDirection=' + ${reverseSortDirection} + ${sortNo}}">
+                <button style="background-color:mediumpurple;color:white;width:150px;height:40px;">Sort By Time</button>
+            </a></td>
     </table>
 </div>
 <br>
@@ -93,7 +95,8 @@
         </table>
         <input style="background-color:green;width:100px;height:30px" type="submit" value="Filter">
     </form>
-    <form action="/dashboard"><input style="background-color:blue;width:100px;height:30px" type="submit" value="Reset"></form>
+    <form action="/dashboard"><input style="background-color:blue;width:100px;height:30px" type="submit" value="Reset">
+    </form>
 </div>
 <br><br>
 <div th:each="post : ${posts}">

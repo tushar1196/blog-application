@@ -111,7 +111,7 @@ public class PostController {
         }
         model.addAttribute("postId", id);
         model.addAttribute("post", post);
-        System.out.println("role_________________++++++++++++++ "+user.getRole());
+//        System.out.println("role_________________++++++++++++++ "+user.getRole());
         if (user!=null && user.getRole().equals("ROLE_AUTHOR")) {
             return "readPostAuthorisedUser";
         } else if (user!=null && user.getRole().equals("ROLE_ADMIN")) {
