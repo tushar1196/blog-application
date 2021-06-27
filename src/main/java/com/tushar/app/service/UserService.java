@@ -5,6 +5,8 @@ import com.tushar.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -16,14 +18,14 @@ public class UserService {
     }
 
     public boolean verifyCredential(String email, String password) {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByUserName(email);
         System.out.println(user);
         return user != null;
     }
 
-//    public List<User> findAllUsers(String s) {
-//        return userRepository.findAll();
-//    }
+    public List<User> findAllUsers(String s) {
+        return userRepository.findAll();
+    }
 
     public String findById(int id) {
         User user = userRepository.findById(id);

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
 
-//    private User user;
+    private User user;
 //    @Autowired
 //    UserRepository userRepository;
 
@@ -25,27 +25,32 @@ public class MyUserDetails implements UserDetails {
 
 
     public MyUserDetails(User user) {
-        this.userName = user.getEmail();
-        this.password = user.getPassword();
-        this.name = user.getName();
-        this.authorities = Arrays.stream(user.getRole().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+//        this.userName = user.getEmail();
+//        this.password = user.getPassword();
+//        this.name = user.getName();
+//        this.authorities = Arrays.stream(user.getRole().split(","))
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
+
+
+        return List.of(simpleGrantedAuthority);
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return user.getEmail();
     }
 
     @Override

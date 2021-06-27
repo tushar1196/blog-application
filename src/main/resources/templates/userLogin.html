@@ -6,9 +6,15 @@
     <title>Title</title>
 </head>
 <body>
-<h2 th:text="${invalidCredentialMessage}"></h2>
-<h2 th:text="${accountCreationMessage}"></h2>
-<form action="/checkcredentials" method="post">
+<!--<h2 th:text="${invalidCredentialMessage}"></h2>-->
+<!--<h2 th:text="${accountCreationMessage}"></h2>-->
+<div th:if="${param.error}" class="alert alert-danger">
+    Invalid username and password
+</div>
+<div th:if="${param.logout}" class="alert alert-success">
+    You are logged out
+</div>
+<form name="f" th:action="@{/login}" method="post">
 
     <label for="email">Email:</label><br>
     <input type="email" id="email" name="email" placeholder="Your Email" required><br><br>

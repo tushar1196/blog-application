@@ -8,6 +8,9 @@ import com.tushar.app.service.PostService;
 import com.tushar.app.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +65,12 @@ public class PostController {
     @RequestMapping("/page/addpost")
     public String viewBlogForm(Model model) {
         Post post = new Post();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if( principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        }
+        post.setAuthor(username);
         model.addAttribute("post", post);
         return "addPost";
     }
