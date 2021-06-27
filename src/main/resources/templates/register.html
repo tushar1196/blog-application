@@ -5,31 +5,37 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .form {
-        border:5px solid green;
-        margin-left: 50px;
-        margin-right: 600px;
-        }
+<!--        .form {-->
+<!--        border:5px solid slateblue;-->
+<!--        }-->
+
+
+
     </style>
 </head>
 <body>
-
-<h1>Register</h1>
-<div class="form">
+<a href="/">
+    <button style="background-color:maroon;color:white;width:150px;height:40px;">Home</button>
+</a>
+<div class="form" align="center">
+    <h1 style="background-color:yellow;width:300px">Sign Up Form</h1>
     <form action="/saveuser" method="post" th:action="@{/saveuser}" th:object=${user}>
 
         <br>
-        <label>Name:</label><br>
-        <input type="text" th:field="*{name}" required/><br/>
+        <!--        <h2 style="width:1000px;height:50px">Email:</h2>-->
+        <label><h2 style="width:1000px;height:50px">Name:</h2></label>
+        <input style="height:50px;width:500px" type="text" th:field="*{name}" placeholder="Enter your Name"
+               required/>
 
-        <label>E-mail:</label><br>
-        <input type="email" th:field="*{email}" required/><br/>
+        <label><h2 style="width:1000px;height:50px;">Email:</h2></label>
+        <input style="height:50px;width:500px" type="email" th:field="*{email}" placeholder="Enter your Email"
+               required/>
 
-        <label>Password:</label><br>
-        <input type="password" th:field="*{password}" required/><br/>
-
-        <br>
-        <input type="submit" value="Register"><br><br>
+        <label><h2 style="width:1000px;height:50px;">Password:</h2></label>
+        <input style="height:50px;width:500px" type="password" th:field="*{password}" placeholder="Enter Password"
+               required/>
+        <br><br>
+        <input style="height:50px;width:500px;background-color:green" type="submit" value="Sign Up"><br><br>
     </form>
     <br>
 </div>
