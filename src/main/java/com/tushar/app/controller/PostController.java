@@ -78,9 +78,11 @@ public class PostController {
     public String viewBlogForm(Model model) {
         Post post = new Post();
         User user = userService.getLoggedUser();
+        System.out.println(user+"  in post controller ?????????????????????????????????????????????");
         post.setAuthor(user.getName());
         model.addAttribute("role", user.getRole());
         model.addAttribute("post", post);
+        System.out.println("above return of add post");
         return "addPost";
     }
 

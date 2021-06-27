@@ -54,7 +54,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                         , "/filter**", "/register**", "/saveuser**", "/savecomment/**").permitAll()
                 .antMatchers("read/delete/**", "read/updatecomment/**", "/addpost", "/page/addpost"
                         , "/delete", "/update").hasAnyRole("AUTHOR", "ADMIN")
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

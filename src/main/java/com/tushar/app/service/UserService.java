@@ -41,7 +41,7 @@ public class UserService {
             username = ((UserDetails) principal).getUsername();
         }
         User user = this.findByEmail(username);
-//        System.out.println(user+" ++++++++++++++++++++ "+username);
+        System.out.println(user+" ++++++++++++++++++++ "+username);
         return user;
     }
 }

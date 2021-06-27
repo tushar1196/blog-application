@@ -39,6 +39,7 @@ public class MyUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
         List<SimpleGrantedAuthority> list = new ArrayList<>();
+        list.add(simpleGrantedAuthority);
         return list;
     }
 
