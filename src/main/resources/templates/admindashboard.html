@@ -31,6 +31,7 @@
         .clear {
         margin-left: 200px;
 
+
     </style>
 </head>
 <body>
@@ -40,7 +41,7 @@
 <!--</a></td>-->
 <table>
     <td>
-        <a href="addpost">
+        <a href="/addpost">
             <button style="background-color:maroon;color:white;width:150px;height:40px;">Add Post</button>
         </a></div>
     </td>
@@ -85,12 +86,13 @@
                 <label th:text="${tag.name}"></label>
             </li>
         </ul>
+        By Dates
         <table>
             <td>
-                <input type="datetime-local" name="dateFrom">
+                Start Date:-<input type="datetime-local" name="dateFrom">
             </td>
             <td>
-                <input type="datetime-local" name="dateTo">
+                End Date:-<input type="datetime-local" name="dateTo">
             </td>
         </table>
         <input style="background-color:green;width:100px;height:30px" type="submit" value="Filter">
