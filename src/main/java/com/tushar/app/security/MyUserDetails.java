@@ -1,37 +1,17 @@
 package com.tushar.app.security;
 
 import com.tushar.app.model.User;
-import com.tushar.app.repository.UserRepository;
-import com.tushar.app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
 
     private User user;
-//    @Autowired
-//    UserRepository userRepository;
-
-    private String userName;
-    private String password;
-    private String name;
-    private String role;
-    private List<GrantedAuthority> authorities;
-
 
     public MyUserDetails(User user) {
-//        this.userName = user.getEmail();
-//        this.password = user.getPassword();
-//        this.name = user.getName();
-//        this.authorities = Arrays.stream(user.getRole().split(","))
-//                .map(SimpleGrantedAuthority::new)
-//                .collect(Collectors.toList());
-
         this.user = user;
     }
 

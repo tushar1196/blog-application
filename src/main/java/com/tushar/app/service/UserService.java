@@ -7,8 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
 
@@ -19,19 +17,18 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean verifyCredential(String email, String password) {
-        User user = userRepository.findByUserName(email);
-        System.out.println(user);
-        return user != null;
-    }
+//    public boolean verifyCredential(String email, String password) {
+//        User user = userRepository.findByUserName(email);
+//        System.out.println(user);
+//        return user != null;
+//    }
 
-    public List<User> findAllUsers(String s) {
-        return userRepository.findAll();
-    }
+//    public List<User> findAllUsers(String s) {
+//        return userRepository.findAll();
+//    }
 
     public User findByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        return user;
+        return userRepository.findByEmail(email);
     }
 
     public User getLoggedUser() {
@@ -40,8 +37,6 @@ public class UserService {
         if( principal instanceof UserDetails) {
             username = ((UserDetails) principal).getUsername();
         }
-        User user = this.findByEmail(username);
-        System.out.println(user+" ++++++++++++++++++++ "+username);
-        return user;
+        return this.findByEmail(username);
     }
 }
