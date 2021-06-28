@@ -18,4 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query(value ="SELECT * FROM posts p INNER JOIN post_tags pt ON p.id = pt.post_id INNER JOIN tags t ON pt.tag_id = t.id where t.id IN ?1" , nativeQuery = true )
     List<Post> findAllByTagId(List<Integer> id);
+
+    @Query(value ="SELECT * FROM posts p where p.author IN ?1" , nativeQuery = true )
+    List<Post> findAllByAuthors(List<String> authors);
 }

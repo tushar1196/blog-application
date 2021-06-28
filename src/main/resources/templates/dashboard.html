@@ -35,6 +35,7 @@
         }
         .clear {
         margin-left: 200px;
+
     </style>
 </head>
 <body>
@@ -78,13 +79,27 @@
         <br>
     </form>
     <form method="post" th:action="@{/filter}" th:object="${filter}">
-        Filter By Tags:
-        <ul>
-            <li th:each="tag:${tags}">
-                <input type="checkbox" th:field="*{tags}" th:value="${tag.id}">
-                <label th:text="${tag.name}"></label>
-            </li>
-        </ul>
+        <table>
+            <td>
+                Filter By Tags:
+                <ul>
+                    <li th:each="tag:${tags}">
+                        <input type="checkbox" th:field="*{tags}" th:value="${tag.id}">
+                        <label th:text="${tag.name}"></label>
+                    </li>
+                </ul>
+            </td>
+            <td></td>
+            <td>
+                Filter By Author:
+                <ul>
+                    <li th:each="author:${authors}">
+                        <input type="checkbox" th:field="*{authors}" th:value="${author}">
+                        <label th:text="${author}"></label>
+                    </li>
+                </ul>
+            </td>
+        </table>
         By Dates
         <table>
             <td>

@@ -71,7 +71,7 @@ public class PostService {
         return postsRepo.finaDistinctAuthors();
     }
 
-    public List<Post> findPostByFilter(List<Integer> id, String dateFrom, String dateTo) {
+    public List<Post> findPostByFilter(List<Integer> id, List<String> authors, String dateFrom, String dateTo) {
         Timestamp dateF;
         Timestamp dateT;
         if (!dateFrom.isEmpty() && !dateTo.isEmpty()) {
@@ -81,12 +81,31 @@ public class PostService {
             List<Post> filterPosts = new ArrayList<>();
             if (!id.isEmpty()) {
                 posts = postsRepo.findAllByTagId(id);
-                for (Post post : posts) {
-                    if (post.getPublishedAt().compareTo(dateF) >= 0 && post.getPublishedAt().compareTo(dateT) <= 0) {
-                        filterPosts.add(post);
+                if (authors.isEmpty()) {
+                    for (Post post : posts) {
+                        if (post.getPublishedAt().compareTo(dateF) >= 0
+                                && post.getPublishedAt().compareTo(dateT) <= 0) {
+                            filterPosts.add(post);
+                        }
+                    }
+                } else {
+                    for (Post post : posts) {
+                        if (post.getPublishedAt().compareTo(dateF) >= 0
+                                && post.getPublishedAt().compareTo(dateT) <= 0
+                                && authors.contains(post.getAuthor())) {
+                            filterPosts.add(post);
+                        }
                     }
                 }
                 return filterPosts;
+            } else if (!authors.isEmpty()) {
+                List<Post> postsByAuthors = postsRepo.findAllByAuthors(authors);
+                for (Post post : postsByAuthors) {
+                    if (post.getPublishedAt().compareTo(dateF) >= 0
+                            && post.getPublishedAt().compareTo(dateT) <= 0) {
+                        filterPosts.add(post);
+                    }
+                }
             } else {
                 posts = postsRepo.findAll();
                 for (Post post : posts) {
@@ -96,10 +115,18 @@ public class PostService {
                 }
             }
             return filterPosts;
-        } else return postsRepo.findAllByTagId(id);
+        } else if (authors.isEmpty() && !id.isEmpty()) {
+            return postsRepo.findAllByTagId(id);
+        } else if(!authors.isEmpty() && id.isEmpty()) {
+            return postsRepo.findAllByAuthors(authors);
+        } else {
+            List<Post> filterPosts = new ArrayList<>();
+            for (Post post:postsRepo.findAllByTagId(id)) {
+                if (authors.contains(post.getAuthor())) {
+                    filterPosts.add(post);
+                }
+            }
+            return filterPosts;
+        }
     }
 }
-
-
-
-

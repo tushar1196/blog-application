@@ -57,9 +57,7 @@ public class PostController {
             model.addAttribute("helperName", "null");
         }
         model.addAttribute("posts", listPosts);
-//        System.out.println(user.getRole()+" ____________ " );
         if (user != null && user.getRole().equals("ROLE_ADMIN")) {
-            System.out.println(user+"+++++++++++++++++++++++++++++++++++++++++");
             return "admindashboard";
         } else {
             return "dashboard";
@@ -75,7 +73,6 @@ public class PostController {
     public String viewBlogForm(Model model) {
         Post post = new Post();
         User user = userService.getLoggedUser();
-        System.out.println(user+"  in post controller ?????????????????????????????????????????????");
         post.setAuthor(user.getName());
         model.addAttribute("role", user.getRole());
         model.addAttribute("post", post);
@@ -145,7 +142,11 @@ public class PostController {
             System.out.println(tag.getName());
             id.add((tag.getId()));
         }
-        model.addAttribute("posts", postService.findPostByFilter(id, dateFrom, dateTo));
+        List<String> authors=new ArrayList<>();
+        for (String author:filter.getAuthors()) {
+            authors.add(author);
+        }
+        model.addAttribute("posts", postService.findPostByFilter(id,authors,dateFrom, dateTo));
         return "dashboard";
     }
 }
