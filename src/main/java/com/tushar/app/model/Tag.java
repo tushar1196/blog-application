@@ -1,5 +1,7 @@
 package com.tushar.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -14,6 +16,7 @@ public class Tag {
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tags")
     private Set<Post> posts = new HashSet<>();
 

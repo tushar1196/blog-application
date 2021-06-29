@@ -1,5 +1,7 @@
 package com.tushar.app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class Post {
     private boolean isPublished;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "post_tags",
             joinColumns = {@JoinColumn(name = "post_id")},
@@ -31,6 +34,16 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private List<Comment> comments = new ArrayList<>();
+
+    public Post() {
+    }
+
+    public Post(String title, String excerpt, String content, String author) {
+        this.title = title;
+        this.excerpt = excerpt;
+        this.content = content;
+        this.author = author;
+    }
 
     public int getId() {
         return id;

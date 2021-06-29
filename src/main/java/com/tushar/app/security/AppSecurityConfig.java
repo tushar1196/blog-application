@@ -48,11 +48,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/dashboard**","/","/page/**", "/read**", "/search**"
+                .antMatchers("/dashboard**", "/", "/page/**", "/read**", "/search**"
                         , "/filter**", "/register**", "/saveuser**", "/savecomment/**").permitAll()
                 .antMatchers("read/delete/**", "read/updatecomment/**", "/addpost", "/page/addpost"
                         , "/delete", "/update").hasAnyRole("AUTHOR", "ADMIN")
-                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -61,13 +60,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successForwardUrl("/")
                 .permitAll()
                 .and()
+                .csrf().disable()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutSuccessUrl("/login")
                 .permitAll();
-
-
     }
 }

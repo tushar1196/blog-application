@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -26,6 +27,10 @@ public class CommentService {
         postRepository.save(post);
     }
 
+    public List<Comment> findAllComment() {
+        return commentRepository.findAll();
+    }
+
     public void saveUpdateComment(Comment comment) {
         comment.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
         commentRepository.save(comment);
@@ -37,5 +42,9 @@ public class CommentService {
 
     public Comment findById(int id) {
         return commentRepository.findById(id).get();
+    }
+
+    public void addComment(Comment comment) {
+        commentRepository.save(comment);
     }
 }

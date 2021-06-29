@@ -117,16 +117,25 @@ public class PostService {
             return filterPosts;
         } else if (authors.isEmpty() && !id.isEmpty()) {
             return postsRepo.findAllByTagId(id);
-        } else if(!authors.isEmpty() && id.isEmpty()) {
+        } else if (!authors.isEmpty() && id.isEmpty()) {
             return postsRepo.findAllByAuthors(authors);
         } else {
             List<Post> filterPosts = new ArrayList<>();
-            for (Post post:postsRepo.findAllByTagId(id)) {
+            for (Post post : postsRepo.findAllByTagId(id)) {
                 if (authors.contains(post.getAuthor())) {
                     filterPosts.add(post);
                 }
             }
             return filterPosts;
         }
+    }
+
+    public List<Post> findAllPosts() {
+        return postsRepo.findAll();
+    }
+
+    public Post addPost(Post post) {
+        postsRepo.save(post);
+        return post;
     }
 }

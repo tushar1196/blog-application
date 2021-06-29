@@ -23,6 +23,7 @@ public class PostController {
     @Autowired
     UserService userService;
 
+
     @RequestMapping("/")
     public String getBlogs(Model model) {
         return viewPostPaginated(1, model, "title", "asc");
@@ -98,19 +99,18 @@ public class PostController {
         User user = userService.getLoggedUser();
         Comment comment = new Comment();
         model.addAttribute("comment", comment);
-        if(user!=null) {
-            model.addAttribute("userName",user.getName());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
             comment.setName(user.getName());
             comment.setEmail(user.getEmail());
         } else {
-            model.addAttribute("userName","null");
+            model.addAttribute("userName", "null");
         }
         model.addAttribute("postId", id);
         model.addAttribute("post", post);
-//        System.out.println("role_________________++++++++++++++ "+user.getRole());
-        if (user!=null && user.getRole().equals("ROLE_AUTHOR")) {
+        if (user != null && user.getRole().equals("ROLE_AUTHOR")) {
             return "readPostAuthorisedUser";
-        } else if (user!=null && user.getRole().equals("ROLE_ADMIN")) {
+        } else if (user != null && user.getRole().equals("ROLE_ADMIN")) {
             return "readPostAdmin";
         } else {
             return "readPost";
@@ -121,7 +121,6 @@ public class PostController {
     public String updatePost(@RequestParam("id") int id, Model model) {
         Post post = postService.findPostById(id);
         User user = userService.getLoggedUser();
-        System.out.println(user+"  in post controller ?????????????????????????????????????????????");
         post.setAuthor(user.getName());
         model.addAttribute("role", user.getRole());
         model.addAttribute("post", post);
@@ -142,11 +141,8 @@ public class PostController {
             System.out.println(tag.getName());
             id.add((tag.getId()));
         }
-        List<String> authors=new ArrayList<>();
-        for (String author:filter.getAuthors()) {
-            authors.add(author);
-        }
-        model.addAttribute("posts", postService.findPostByFilter(id,authors,dateFrom, dateTo));
+        List<String> authors = new ArrayList<>(filter.getAuthors());
+        model.addAttribute("posts", postService.findPostByFilter(id, authors, dateFrom, dateTo));
         return "dashboard";
     }
 }

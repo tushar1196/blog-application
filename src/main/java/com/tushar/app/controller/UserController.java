@@ -31,7 +31,6 @@ public class UserController {
 
     @PostMapping("/saveuser")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
-        System.out.println(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_AUTHOR");
         userService.saveUser(user);
