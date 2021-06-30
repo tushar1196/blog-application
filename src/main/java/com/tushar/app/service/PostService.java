@@ -47,6 +47,10 @@ public class PostService {
         postsRepo.save(post);
     }
 
+    public void savePost(Post post) {
+        postsRepo.save(post);
+    }
+
     public void deletePostById(int id) {
         postsRepo.deleteById(id);
     }

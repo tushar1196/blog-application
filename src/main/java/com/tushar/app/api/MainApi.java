@@ -6,9 +6,13 @@ import com.tushar.app.service.PostService;
 import com.tushar.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -107,7 +111,8 @@ public class MainApi {
     }
 
     @GetMapping("/filter")
-    public List<Post> getPostsByFilter(@RequestBody Filter filter, @RequestParam("dateFrom") String dateFrom, @RequestParam("dateTo") String dateTo) {
+    public List<Post> getPostsByFilter(@RequestBody Filter filter, @RequestParam("dateFrom") String dateFrom,
+                                       @RequestParam("dateTo") String dateTo) {
         List<Integer> id = new ArrayList<>();
         for (Tag tag : filter.getTags()) {
             System.out.println(tag.getName());
@@ -118,7 +123,8 @@ public class MainApi {
     }
 
     @GetMapping("/paginated/{pageNo}")
-    public List<Post> viewPostPaginated(@PathVariable("pageNo") int pageNo, @RequestParam("sortField") String sortField, @RequestParam("sortDirection") String sortDirection) {
+    public List<Post> viewPostPaginated(@PathVariable("pageNo") int pageNo, @RequestParam("sortField") String sortField,
+                                        @RequestParam("sortDirection") String sortDirection) {
         int pageSize = 5;
         Page<Post> page = postService.findPaginatedPosts(pageNo, pageSize, sortField, sortDirection);
         return page.getContent();
@@ -127,5 +133,44 @@ public class MainApi {
     @GetMapping("/search")
     public List<Post> getPostBySearch(@RequestParam("search") String search) {
         return postService.findBySearchKeyword(search);
+    }
+
+    @PostMapping("/author/posts")
+    public Post savePost(@RequestParam("tag") String tags, @RequestBody Post post, Authentication authentication) {
+        String[] tagsArray = tags.split(",");
+        List<String> tagsList = Arrays.asList(tagsArray);
+        User user = userService.findByEmail(authentication.getName());
+        post.setAuthor(user.getName());
+        postService.savePost(post, tags);
+        return post;
+    }
+
+    @PutMapping("/author/posts/{id}")
+    public Post updatePost(@PathVariable(value = "id") Integer id, @RequestBody Post post,
+                           Authentication authentication) {
+        Post posts = postService.findPostById(id);
+        User user = userService.findByEmail(authentication.getName());
+        System.out.println(post);
+        Timestamp instant = Timestamp.from(Instant.now());
+
+        if (posts.getAuthor().equals(user.getName()) || user.getRole().equals("ROLE_ADMIN")) {
+            posts.setAuthor(user.getName());
+            posts.setUpdatedAt(instant);
+            posts.setTitle(post.getTitle());
+            posts.setContent(post.getContent());
+            posts.setExcerpt(post.getExcerpt());
+            postService.savePost(posts);
+            return post;
+        }
+        return post;
+    }
+
+    @DeleteMapping("author/posts/{id}")
+    public void deletePost(@PathVariable(value = "id") Integer id, Authentication authentication) {
+        Post post = postService.findPostById(id);
+        User user = userService.findByEmail(authentication.getName());
+        if (post.getAuthor().equals(user.getName()) || user.getRole().equals("ROLE_ADMIN")) {
+            postService.deletePostById(id);
+        }
     }
 }

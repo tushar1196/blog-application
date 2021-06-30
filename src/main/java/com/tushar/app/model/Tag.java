@@ -16,7 +16,6 @@ public class Tag {
     private String name;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tags")
     private Set<Post> posts = new HashSet<>();
 

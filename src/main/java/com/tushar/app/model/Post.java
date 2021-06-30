@@ -1,5 +1,6 @@
 package com.tushar.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Post {
     private boolean isPublished;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "post_tags",
             joinColumns = {@JoinColumn(name = "post_id")},
