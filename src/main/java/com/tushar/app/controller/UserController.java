@@ -3,6 +3,7 @@ package com.tushar.app.controller;
 import com.tushar.app.model.User;
 import com.tushar.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +19,10 @@ public class UserController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping("/login")
-    public String userLogin() {
+    public String userLogin(Authentication authentication) {
+        if(authentication != null) {
+            return "redirect:/";
+        }
         return "userLogin";
     }
 
